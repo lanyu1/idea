@@ -1,0 +1,5 @@
+<root>
+    <item name='org.springframework.web.multipart.MultipartFile boolean isEmpty()'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>

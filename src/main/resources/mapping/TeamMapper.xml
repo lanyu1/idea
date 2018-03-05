@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hand.idea.mapper.TeamMapper">
+  <resultMap id="BaseResultMap" type="com.hand.idea.domain.Team">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="founderId" jdbcType="INTEGER" property="founderid" />
+    <result column="eventId" jdbcType="INTEGER" property="eventid" />
+    <result column="teamName" jdbcType="VARCHAR" property="teamname" />
+    <result column="teammateNumber" jdbcType="INTEGER" property="teammatenumber" />
+    <result column="maxTeammateNumber" jdbcType="INTEGER" property="maxteammatenumber" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="photoName" jdbcType="VARCHAR" property="photoname" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, founderId, eventId, teamName, teammateNumber, maxTeammateNumber, notice, createTime, 
+    photoName, description
+  </sql>
+  <select id="selectByExample" parameterType="com.hand.idea.domain.TeamExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from idea_team
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from idea_team
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from idea_team
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hand.idea.domain.TeamExample">
+    delete from idea_team
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hand.idea.domain.Team">
+    insert into idea_team (id, founderId, eventId, 
+      teamName, teammateNumber, maxTeammateNumber, 
+      notice, createTime, photoName, 
+      description)
+    values (#{id,jdbcType=INTEGER}, #{founderid,jdbcType=INTEGER}, #{eventid,jdbcType=INTEGER}, 
+      #{teamname,jdbcType=VARCHAR}, #{teammatenumber,jdbcType=INTEGER}, #{maxteammatenumber,jdbcType=INTEGER}, 
+      #{notice,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{photoname,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hand.idea.domain.Team">
+    insert into idea_team
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="founderid != null">
+        founderId,
+      </if>
+      <if test="eventid != null">
+        eventId,
+      </if>
+      <if test="teamname != null">
+        teamName,
+      </if>
+      <if test="teammatenumber != null">
+        teammateNumber,
+      </if>
+      <if test="maxteammatenumber != null">
+        maxTeammateNumber,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="photoname != null">
+        photoName,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="founderid != null">
+        #{founderid,jdbcType=INTEGER},
+      </if>
+      <if test="eventid != null">
+        #{eventid,jdbcType=INTEGER},
+      </if>
+      <if test="teamname != null">
+        #{teamname,jdbcType=VARCHAR},
+      </if>
+      <if test="teammatenumber != null">
+        #{teammatenumber,jdbcType=INTEGER},
+      </if>
+      <if test="maxteammatenumber != null">
+        #{maxteammatenumber,jdbcType=INTEGER},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="photoname != null">
+        #{photoname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hand.idea.domain.TeamExample" resultType="java.lang.Long">
+    select count(*) from idea_team
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update idea_team
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.founderid != null">
+        founderId = #{record.founderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.eventid != null">
+        eventId = #{record.eventid,jdbcType=INTEGER},
+      </if>
+      <if test="record.teamname != null">
+        teamName = #{record.teamname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teammatenumber != null">
+        teammateNumber = #{record.teammatenumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxteammatenumber != null">
+        maxTeammateNumber = #{record.maxteammatenumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.notice != null">
+        notice = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.photoname != null">
+        photoName = #{record.photoname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update idea_team
+    set id = #{record.id,jdbcType=INTEGER},
+      founderId = #{record.founderid,jdbcType=INTEGER},
+      eventId = #{record.eventid,jdbcType=INTEGER},
+      teamName = #{record.teamname,jdbcType=VARCHAR},
+      teammateNumber = #{record.teammatenumber,jdbcType=INTEGER},
+      maxTeammateNumber = #{record.maxteammatenumber,jdbcType=INTEGER},
+      notice = #{record.notice,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      photoName = #{record.photoname,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hand.idea.domain.Team">
+    update idea_team
+    <set>
+      <if test="founderid != null">
+        founderId = #{founderid,jdbcType=INTEGER},
+      </if>
+      <if test="eventid != null">
+        eventId = #{eventid,jdbcType=INTEGER},
+      </if>
+      <if test="teamname != null">
+        teamName = #{teamname,jdbcType=VARCHAR},
+      </if>
+      <if test="teammatenumber != null">
+        teammateNumber = #{teammatenumber,jdbcType=INTEGER},
+      </if>
+      <if test="maxteammatenumber != null">
+        maxTeammateNumber = #{maxteammatenumber,jdbcType=INTEGER},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="photoname != null">
+        photoName = #{photoname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hand.idea.domain.Team">
+    update idea_team
+    set founderId = #{founderid,jdbcType=INTEGER},
+      eventId = #{eventid,jdbcType=INTEGER},
+      teamName = #{teamname,jdbcType=VARCHAR},
+      teammateNumber = #{teammatenumber,jdbcType=INTEGER},
+      maxTeammateNumber = #{maxteammatenumber,jdbcType=INTEGER},
+      notice = #{notice,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      photoName = #{photoname,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
