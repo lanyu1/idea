@@ -130,6 +130,12 @@
     u.description,e.eid,e.founderId, e.title, e.type, e.photoName, e.province, e.city, e.detailedDescription, e.createTime,
     e.stateId, e.instruction, e.support
   </sql>
+  <select id="searchOneUserByEmail"  parameterType="com.hand.idea.domain.UserExample" resultMap="WithEventResultMap">
+    select
+    <include refid="WithEventList" />
+    from idea_user u left join idea_event e on u.`id`=e.`founderId`
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
   <select id="searchOneUser" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

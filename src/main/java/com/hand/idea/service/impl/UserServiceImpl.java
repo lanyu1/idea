@@ -35,6 +35,12 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 	}
+
+	@Override
+	public User selectUserByEmail(String email) {
+		return userMapper.searchOneUserByEmail(email);
+	}
+
 	@Override
 	public String regUser(User user) {
 		if (user.getEmail() != null && user.getNikeName() != null && user.getPassword() != null) {

@@ -50,6 +50,16 @@ public class UserController {
 	}
 
 	/**
+	 * 根据邮箱查询用户信息
+	 * @param email
+	 * @return
+	 */
+	@RequestMapping(value = "/getUserByEmail",method = RequestMethod.GET)
+	public User getUser(@RequestParam("email") String email){
+		return userService.selectUserByEmail(email);
+	}
+
+	/**
 	 * 查询所有并分页显示
 	 * @return
 	 */

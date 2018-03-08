@@ -12,6 +12,8 @@ public interface UserService {
 
 	public User login(String email,String password);
 
+	public User selectUserByEmail(String email);
+
 	public String regUser(User user);
 
 	public Integer insert(User user);
