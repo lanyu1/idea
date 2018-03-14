@@ -163,7 +163,7 @@ public class Event {
         this.detaileddescription = detaileddescription == null ? null : detaileddescription.trim();
     }
 
-    @JsonFormat(pattern="yyyy年MM月dd日")
+    @JsonFormat(pattern="yyyy-MM-dd")
     public Date getCreatetime() {
         return createtime;
     }

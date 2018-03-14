@@ -1,5 +1,7 @@
 package com.hand.idea.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 /**
  * 评论实体类
@@ -16,6 +18,16 @@ public class Comment {
     private String content;
 
     private Date commenttime;
+
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;
@@ -48,7 +60,7 @@ public class Comment {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
-
+    @JsonFormat(pattern="yyyy-MM-dd")
     public Date getCommenttime() {
         return commenttime;
     }

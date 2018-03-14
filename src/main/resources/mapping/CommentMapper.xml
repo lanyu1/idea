@@ -8,6 +8,18 @@
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="commentTime" jdbcType="TIMESTAMP" property="commenttime" />
   </resultMap>
+  <resultMap id="CommentWithUserMap" type="com.hand.idea.domain.Comment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="eventId" jdbcType="INTEGER" property="eventid" />
+    <result column="commentId" jdbcType="INTEGER" property="commentid" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="commentTime" jdbcType="TIMESTAMP" property="commenttime" />
+  <association property="user" javaType="User">
+    <id column="id" jdbcType="INTEGER" property="uid" />
+    <result column="nike_name" jdbcType="VARCHAR" property="nikeName"/>
+    <result column="head_photo" jdbcType="VARCHAR" property="headPhoto" />
+  </association>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -69,6 +81,15 @@
   <sql id="Base_Column_List">
     id, eventId, commentId, content, commentTime
   </sql>
+  <sql id="CommentWithUser">
+    c.eventId,c.commentId,c.content,c.commentTime,u.nike_name,u.head_photo
+  </sql>
+  <select id="selectCommentWithUser" parameterType="com.hand.idea.domain.CommentExample" resultMap="CommentWithUserMap">
+    select
+    <include refid="CommentWithUser" />
+    from idea_comment c,idea_user u
+    where c.commentId = u.id order by commentTime DESC
+  </select>
   <select id="selectByExample" parameterType="com.hand.idea.domain.CommentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -100,9 +121,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hand.idea.domain.Comment">
-    insert into idea_comment (id, eventId, commentId, 
+    insert into idea_comment (eventId, commentId,
       content, commentTime)
-    values (#{id,jdbcType=INTEGER}, #{eventid,jdbcType=INTEGER}, #{commentid,jdbcType=INTEGER}, 
+    values (#{eventid,jdbcType=INTEGER}, #{commentid,jdbcType=INTEGER},
       #{content,jdbcType=VARCHAR}, #{commenttime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hand.idea.domain.Comment">

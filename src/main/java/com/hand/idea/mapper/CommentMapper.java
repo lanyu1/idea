@@ -18,6 +18,8 @@ public interface CommentMapper {
 
     List<Comment> selectByExample(CommentExample example);
 
+    List<Comment> selectCommentWithUser(CommentExample example);
+
     Comment selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Comment record, @Param("example") CommentExample example);

@@ -170,6 +170,9 @@
   <insert id="insertSelectiveEvent" parameterType="com.hand.idea.domain.Event">
     insert into idea_event
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="founderId != null">
+        founderId,
+      </if>
       <if test="title != null">
         title,
       </if>
@@ -193,6 +196,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="founderId != null">
+        #{founderId,jdbcType=VARCHAR},
+      </if>
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
