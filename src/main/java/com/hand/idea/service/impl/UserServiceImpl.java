@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Integer update(User user) {
-		return userMapper.updateByPrimaryKey(user);
+		return userMapper.updateByPrimaryKeySelective(user);
 	}
 
 	/**
