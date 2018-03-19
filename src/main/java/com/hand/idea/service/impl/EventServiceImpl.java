@@ -61,6 +61,14 @@ public class EventServiceImpl  implements EventService {
     }
 
     @Override
+    public PageInfo<Event> selectEventByFounder(Integer founderid, Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+        List<Event> events =eventMapper.selectEventByFounder(founderid);
+        PageInfo<Event> pageInfo = new PageInfo<Event>(events);
+        return pageInfo;
+    }
+
+    @Override
     public Event selectEvent(Integer id) {
 
         return eventMapper.selectByPrimaryKey(id);

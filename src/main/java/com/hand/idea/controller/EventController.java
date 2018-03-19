@@ -29,7 +29,13 @@ public class EventController {
         PageInfo<Event> pageInfo = eventService.selectEvents(page, pageSize);
         return pageInfo;
     }
-
+    @RequestMapping(value = "/getEventsByFounderId", method = RequestMethod.GET)
+    public PageInfo<Event> getEventsByFounderId(@RequestParam("founderid") Integer founderid,
+                                                @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                                @RequestParam(value = "pageSize", required = false, defaultValue = "6") Integer pageSize) {
+        PageInfo<Event> pageInfo = eventService.selectEventByFounder(founderid,page,pageSize);
+        return pageInfo;
+    }
     @RequestMapping(value = "/getEventsWithUser", method = RequestMethod.GET)
     public PageInfo<Event> selectEventsWithUser(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                                 @RequestParam(value = "pageSize", required = false, defaultValue = "6") Integer pageSize) {

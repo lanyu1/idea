@@ -26,6 +26,8 @@ public interface EventMapper  {
 
     List<Event> selectEventsWithUser(EventExample example);
 
+    List<Event> selectEventByFounder(Integer founderid);
+
     List<Event> selectEventByTime(EventExample example);
 
     List<Event> selectByEventType(Integer type);

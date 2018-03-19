@@ -101,9 +101,15 @@
     stateId, instruction, support
   </sql>
   <sql id="EventsWithUserList">
-    e.eid, e.title, e.photoName, e.province, e.city, e.detailedDescription, e.createTime,
+    e.eid, e.founderId, e.title, e.photoName, e.province, e.city, e.detailedDescription, e.createTime,
     e.stateId, e.instruction, e.support,u.nike_name,u.head_photo,et.typeContent
   </sql>
+  <select id="selectEventByFounder" parameterType="com.hand.idea.domain.EventExample" resultMap="EventWithUserResultMap">
+    select
+    <include refid="EventsWithUserList"/>
+    from idea_event e,idea_user u,idea_eventtype et
+    where u.`id`=e.`founderId` and e.`type`=et.`id` and e.founderId = #{founderid,jdbcType=INTEGER}
+  </select>
   <select id="selectEventByTime" parameterType="com.hand.idea.domain.EventExample" resultMap="EventWithUserResultMap">
     select
     <include refid="EventsWithUserList"/>

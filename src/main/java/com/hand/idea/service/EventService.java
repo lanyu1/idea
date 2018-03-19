@@ -13,6 +13,8 @@ public interface EventService {
 
     public PageInfo<Event> selectEventByTime(Integer page, Integer pageSize);
 
+    public PageInfo<Event> selectEventByFounder(Integer founderid,Integer page, Integer pageSize);
+
     public Event selectEvent(Integer id);
 
     public String addEvent(Event event);
