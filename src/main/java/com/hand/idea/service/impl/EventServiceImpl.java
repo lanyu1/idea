@@ -92,7 +92,7 @@ public class EventServiceImpl  implements EventService {
 
     @Override
     public Integer updateEvent(Event event) {
-        return eventMapper.updateByPrimaryKey(event);
+        return eventMapper.updateByPrimaryKeySelective(event);
     }
 
     @Override

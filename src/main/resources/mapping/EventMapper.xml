@@ -435,7 +435,7 @@
         support = #{support,jdbcType=INTEGER},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where eid = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hand.idea.domain.Event">
     update idea_event
@@ -450,6 +450,6 @@
       stateId = #{stateid,jdbcType=INTEGER},
       instruction = #{instruction,jdbcType=VARCHAR},
       support = #{support,jdbcType=INTEGER}
-    where eid = #{eid,jdbcType=INTEGER}
+    where eid = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

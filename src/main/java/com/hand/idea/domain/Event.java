@@ -57,6 +57,20 @@ public class Event {
         this.eventType = eventType;
     }
 
+    public Event(Integer founderid, String title, Integer type, String photoname, String province, String city, String detaileddescription, Date createtime, Integer stateid, String instruction, Integer support) {
+        this.founderid = founderid;
+        this.title = title;
+        this.type = type;
+        this.photoname = photoname;
+        this.province = province;
+        this.city = city;
+        this.detaileddescription = detaileddescription;
+        this.createtime = createtime;
+        this.stateid = stateid;
+        this.instruction = instruction;
+        this.support = support;
+    }
+
     public Event(Integer founderid, String title, Integer type, String photoname, String province, String city, Date createtime, String instruction) {
         this.founderid = founderid;
         this.title = title;
