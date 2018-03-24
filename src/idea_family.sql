@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2018-01-17 18:58:52
+Date: 2018-03-24 10:15:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,11 +26,19 @@ CREATE TABLE `idea_comment` (
   `content` varchar(2550) DEFAULT NULL,
   `commentTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_comment
 -- ----------------------------
+INSERT INTO `idea_comment` VALUES ('11', '1', '1', '这里是评论内容', '2018-03-10 00:00:00');
+INSERT INTO `idea_comment` VALUES ('29', '51', '1', '创意不错', '2018-03-10 08:00:00');
+INSERT INTO `idea_comment` VALUES ('31', '51', '1', '这个创意我比较支持', '2018-03-11 08:00:00');
+INSERT INTO `idea_comment` VALUES ('32', '51', '1', '莉莉真美！！', '2018-03-11 08:00:00');
+INSERT INTO `idea_comment` VALUES ('33', '51', '1', '1111', '2018-03-11 08:00:00');
+INSERT INTO `idea_comment` VALUES ('34', '57', '11', '123456', '2018-03-11 08:00:00');
+INSERT INTO `idea_comment` VALUES ('35', '57', null, '111111111', '2018-03-14 08:00:00');
+INSERT INTO `idea_comment` VALUES ('36', '57', null, '11111', '2018-03-14 08:00:00');
 
 -- ----------------------------
 -- Table structure for idea_event
@@ -50,13 +58,13 @@ CREATE TABLE `idea_event` (
   `instruction` varchar(255) DEFAULT NULL,
   `support` int(11) DEFAULT NULL,
   PRIMARY KEY (`eid`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_event
 -- ----------------------------
 INSERT INTO `idea_event` VALUES ('1', '1', '15分钟，珠江边上的这座院子带你完成一场小逃离', '1', 'minsu1.jpg', '广东', '广州', '离开城市的逼仄，聆听鸟叫船鸣，完成这样一场城市小逃离，只需15分钟。这个珠江边的“隐世度假酒店”，用一个旧船厂，带着老广州记忆的院子，让你捕捉有温度的时光。', '2018-01-10 16:18:01', '1', '离开城市的逼仄，聆听鸟叫船鸣，完成这样一场城市小逃离，只需15分钟。这个珠江边...', '210');
-INSERT INTO `idea_event` VALUES ('2', '1', '秀酒店进驻杭州，八位设计大咖携Each助力，十年一剑众星捧月', '1', 'minsu2.jpg', '浙江', '杭州', '秀酒店是一个轻奢品牌，因年轻而充满创新，满怀突破和打破规则的勇气，这也是我们来到杭州的原因。我们将为年轻新贵设计一个酒店，以有趣对抗无趣，它是个人秀场，是潮流合集。期待你的加入！', '2018-01-09 16:35:49', '1', '秀酒店进驻杭州，八位设计大咖携Each助力，十年一剑众星捧月', '430');
+INSERT INTO `idea_event` VALUES ('2', '1', '秀酒店进驻杭州，八位设计大咖携Each助力，十年一剑众星捧月', '1', 'minsu2.jpg', '浙江', '杭州', '秀酒店是一个轻奢品牌，因年轻而充满创新，满怀突破和打破规则的勇气，这也是我们来到杭州的原因。我们将为年轻新贵设计一个酒店，以有趣对抗无趣，它是个人秀场，是潮流合集。期待你的加入！', '2018-01-09 16:35:49', '1', '秀酒店进驻杭州，八位设计大咖携Each助力，十年一剑众星捧月', '431');
 INSERT INTO `idea_event` VALUES ('3', '1', '「海外探宿」来东京，和有一居共同开启轻酒店时代', '1', 'minsu3.jpg', '日本', '东京', 'THE· SPATIUM GINZA 项目是有一居推出的首个轻酒店，也标志着有一居正式进入品牌化轻酒店运营和投资开发市场。有一居，将从东京开始，把“轻酒店”的投资模式发展到全球各个发达的“旅客城”', '2018-01-08 16:43:55', '1', 'THE· SPATIUM GINZA 项目是有一居推出的首个轻酒店，也标志着有一...', '148');
 INSERT INTO `idea_event` VALUES ('4', '1', '在巴蜀山河和熊猫当邻居，今晚有张好床在等你', '1', 'minsu4.jpg', '四川', '雅安', '我们在城市里行走谋生，在风景里寻找安逸的生活，但这些都不及“虚度时光”重要。此时，在天府之国有一张好床等你来睡。', '2018-01-09 16:44:59', '1', '我们在城市里行走谋生，在风景里寻找安逸的生活，但这些都不及“虚度时光”重要。此时...', '148');
 INSERT INTO `idea_event` VALUES ('5', '1', '紫金山下，住进真正的民国老宅，松花酿酒，春水煎茶', '1', 'minsu5.jpg', '江苏', '南京', '老树院子，我们想做金陵最好玩的朋友圈，把每一个朴素的日子都过成良辰。', '2018-01-08 16:46:28', '1', '老树院子，我们想做金陵最好玩的朋友圈，把每一个朴素的日子都过成良辰。', '321');
@@ -77,7 +85,7 @@ INSERT INTO `idea_event` VALUES ('19', '2', '在北京CBD商场里，开一家�
 INSERT INTO `idea_event` VALUES ('20', '2', '精酿就是要喝出属于自己的Free Style', '2', 'canyin8.jpg', '上海', '上海', 'Brew Bear传递了新颖，潮流，街头的啤酒文化，其不单单是一家酒吧，他更代表了时尚、年轻、自由的生活方式，同时我们也将在不远的将来把精酿文化带向本土化。\r\n\r\nBrew Bear传递了新颖，潮流，街头的啤酒文化，其不单单是一家酒吧，他更代表了时尚、年轻、自由的生活方式，同时我们也将在不远的将来把精酿文化带向本土化。\r\n\r\nBrew Bear传递了新颖，潮流，街头的啤酒文化，其不单单是一家酒吧，他更代表了时尚、年轻、自由的生活方式，同时我们也将在不远的将来把精酿文化带向本土化。\r\n\r\n', '2018-01-08 12:06:40', '1', 'Brew Bear传递了新颖，潮流，街头的啤酒文化，其不单单是一家酒吧，他更代表...', '174');
 INSERT INTO `idea_event` VALUES ('21', '2', 'ADAMI多功能进口酱料，让做饭变成一件简单快乐的事', '2', 'canyin9.jpg', '上海', '上海', 'ADAMI35年用心制酱，好吃、易煮、零添加，与肯德基、美珍香和TESCO乐购全球合作，并在国内成立线下合作美食体验馆。我们所做的只为让你在匆忙的都市里，走进厨房，用一勺酱，做一顿饭，把时光打慢。', '2018-01-08 07:07:37', '1', 'ADAMI35年用心制酱，好吃、易煮、零添加，与肯德基、美珍香和TESCO乐购全...', '671');
 INSERT INTO `idea_event` VALUES ('22', '2', '天人十二载——给最重要的人', '2', 'canyin10.jpg', '陕西', '西安', '“浊酒一杯诗趣妙，歪诗两句酒风狂”，快意！“酒诗文化数千年，携酒吟诗敢问天”，豪气！天人十二致力于打造一款好喝不贵的高端白酒，茅台镇古法秘制，耀州密匠心瓷器装酒，给最重要的人。', '2018-01-07 17:08:48', '1', '“浊酒一杯诗趣妙，歪诗两句酒风狂”，快意！“酒诗文化数千年，携酒吟诗敢问天”，豪...', '419');
-INSERT INTO `idea_event` VALUES ('23', '2', '365天空运活虾，用“师”的态度呈现美味！', '2', '8o', '北京', '北京', '2014年我们的第一家店开业，3年时间开一家火一家，点评热度均为所在区域前茅。一年365天活虾供应、南派烧虾秘方、时尚的品牌跨界营销……「烧虾师」早已成为帝都超人气龙虾品牌。', '2018-01-07 14:09:41', '1', '2014年我们的第一家店开业，3年时间开一家火一家，点评热度均为所在区域前茅。一...', '202');
+INSERT INTO `idea_event` VALUES ('23', '2', '365天空运活虾，用“师”的态度呈现美味！', '2', 'canyin11.jpg', '北京', '北京', '2014年我们的第一家店开业，3年时间开一家火一家，点评热度均为所在区域前茅。一年365天活虾供应、南派烧虾秘方、时尚的品牌跨界营销……「烧虾师」早已成为帝都超人气龙虾品牌。', '2018-01-07 14:09:41', '1', '2014年我们的第一家店开业，3年时间开一家火一家，点评热度均为所在区域前茅。一...', '202');
 INSERT INTO `idea_event` VALUES ('24', '2', '吃过这一餐，觉得人生的棋局尚有七分赢面', '2', 'canyin12.jpg', '北京', '北京', '2018 年 1 月12 日，我们向全国“最挑剔”的食客发出邀请，与大董、沈宏非、陈晓卿、董克平、徐建军等数位行业大咖齐聚北京，共赴一场川、鲁、粤、淮四大名厨首次联袂打造的美食晚宴。', '2018-01-07 08:10:42', '1', '2018 年 1 月12 日，我们向全国“最挑剔”的食客发出邀请，与大董、沈宏非...', '51');
 INSERT INTO `idea_event` VALUES ('25', '3', '梦里桃源，又见温柔乡', '3', 'nongye1.jpg', '浙江', '无锡', '千里走单骑首个田园度假综合体，在烟烟霞霞的桃林下，有氤氤氲氲的温泉水，一边是当代建筑，一边是田野院落，在看得见的桃花源，我们邀你一同前往。', '2018-01-10 18:14:15', '1', '千里走单骑首个田园度假综合体，在烟烟霞霞的桃林下，有氤氤氲氲的温泉水，一边是当代...', '247');
 INSERT INTO `idea_event` VALUES ('26', '3', '全球知名的榴莲果园，我们一起做件“泰”甜蜜的事', '3', 'nongye2.jpg', '泰国', '洛神府', '尖竹汶和洛坤府，位于泰国东部和南部，是全球知名的榴莲产地。我在这里包下了1750亩榴莲果园，每一颗榴莲，都是自然熟透，甜蜜悠长。妮果·泰国榴莲，做的就是这样一件甜蜜的事。', '2018-01-10 17:15:47', '1', '尖竹汶和洛坤府，位于泰国东部和南部，是全球知名的榴莲产地。我在这里包下了1750...', '1010');
@@ -103,9 +111,14 @@ INSERT INTO `idea_event` VALUES ('45', '4', '汲度补水护理，给你未来�
 INSERT INTO `idea_event` VALUES ('46', '4', '皮具设计的深度体验，一起做造物的国王', '4', 'xiuxian10.jpg', '上海', '上海', '7年，上海，核心商圈，城市匠心依靠无法复刻的设计与强大的课程输出，吸引着魔都每一位皮具体验者，与李宗盛、阿信的咖啡馆、保时捷、玛莎拉蒂、IWC、万科、星巴克等进行着深度合作。', '2018-01-06 18:41:26', '1', '7年，上海，核心商圈，城市匠心依靠无法复刻的设计与强大的课程输出，吸引着魔都每一...', '273');
 INSERT INTO `idea_event` VALUES ('47', '4', '厦门这家瑜伽馆，跟这个世界握了握手', '4', 'xiuxian11.jpg', '福建', '厦门', '纳达瑜伽，福建省首家全美瑜伽老师培训认证机构，向全国输出了几千名瑜伽专业老师。通过瑜伽修行，我们每个人都可以了解怎么跟自己相处，以及如何与世界握手。', '2018-01-06 14:42:03', '1', '纳达瑜伽，福建省首家全美瑜伽老师培训认证机构，向全国输出了几千名瑜伽专业老师。通...', '174');
 INSERT INTO `idea_event` VALUES ('48', '4', '颜匠，开启社区美甲店的新时代', '4', 'xiuxian12.jpg', '江苏', '南京', '好的体验，应该让更多的人有机会去尝试。所以，我们用智能颠覆传统的颜匠工场要将社区店开向全中国。', '2018-01-06 08:42:38', '1', '好的体验，应该让更多的人有机会去尝试。所以，我们用智能颠覆传统的颜匠工场要将社区...', '403');
-INSERT INTO `idea_event` VALUES ('49', '1', '测试项目', '2', 'canyin16.jpg', '南京', '江苏', null, '2018-01-10 08:00:00', null, '这里是对于测试项目的描述', null);
-INSERT INTO `idea_event` VALUES ('50', '2', '用一瓶精酿觉醒，与所有庸碌为敌', '2', 'canyin15.jpg', '苏州', '江苏', null, '2018-01-10 10:00:00', null, '虽然我们都是小城青年，但是也想为自己发声，呼吁更多独立先锋的新事物来到我们身边。半闲精酿是来自于安徽黄山小城的第一款地方精酿', null);
-INSERT INTO `idea_event` VALUES ('51', '3', '在厦门，亚太金奖设计师与不安分的地产商造了一家穿越时空的酒店', '1', 'minsu13.jpg', '厦门', '福建', null, '2018-01-11 08:00:00', null, '融合东方西方，穿越旧城老巷；蓝山越造就一份极致，只为等你。我希望她不仅是酒店，更是传达美学设计的平台，是一个有温度的舒适港湾。', null);
+INSERT INTO `idea_event` VALUES ('49', '1', '测试项目', '2', 'canyin16.jpg', '南京', '江苏', null, '2018-01-10 08:00:00', null, '这里是对于测试项目的描述', '3');
+INSERT INTO `idea_event` VALUES ('50', '2', '用一瓶精酿觉醒，与所有庸碌为敌', '2', 'canyin15.jpg', '苏州', '江苏', null, '2018-01-10 10:00:00', null, '虽然我们都是小城青年，但是也想为自己发声，呼吁更多独立先锋的新事物来到我们身边。半闲精酿是来自于安徽黄山小城的第一款地方精酿', '5');
+INSERT INTO `idea_event` VALUES ('51', '3', '在厦门，亚太金奖设计师与不安分的地产商造了一家穿越时空的酒店', '1', 'minsu13.jpg', '厦门', '福建', null, '2018-01-11 08:00:00', null, '融合东方西方，穿越旧城老巷；蓝山越造就一份极致，只为等你。我希望她不仅是酒店，更是传达美学设计的平台，是一个有温度的舒适港湾。', '56');
+INSERT INTO `idea_event` VALUES ('52', '3', '测试项目餐饮17', '2', 'canyin17.jpg', '上海', '上海', null, '2018-03-10 08:00:00', null, '这里是测试项目17的项目描述', '4');
+INSERT INTO `idea_event` VALUES ('53', '2', '测试餐饮项目18', '2', 'canyin18.jpg', '南京', '江苏', null, '2018-03-10 08:00:00', null, '这里是测试餐饮项目18', '3');
+INSERT INTO `idea_event` VALUES ('55', '4', '测试项目餐饮11', '2', 'canyin11.jpg', '杭州', '浙江', null, '2018-03-10 08:00:00', null, '这里是对测试项目餐饮11的项目描述', '1');
+INSERT INTO `idea_event` VALUES ('56', '1', '测试项目农业12', '3', 'nongye12.jpg', '厦门', '福建', null, '2018-03-10 08:00:00', null, '这里是测试项目农业12的项目描述', '2');
+INSERT INTO `idea_event` VALUES ('57', '1', '测试休闲项目', '4', 'xiuxian1.jpg', '上海', '上海', null, '2018-03-10 08:00:00', null, '这里是对于测试休闲项目的项目描述', '3');
 
 -- ----------------------------
 -- Table structure for idea_eventtype
@@ -126,13 +139,36 @@ INSERT INTO `idea_eventtype` VALUES ('3', '农业');
 INSERT INTO `idea_eventtype` VALUES ('4', '休闲');
 
 -- ----------------------------
+-- Table structure for idea_great
+-- ----------------------------
+DROP TABLE IF EXISTS `idea_great`;
+CREATE TABLE `idea_great` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `eventId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of idea_great
+-- ----------------------------
+INSERT INTO `idea_great` VALUES ('1', '1', '1');
+INSERT INTO `idea_great` VALUES ('2', '1', '2');
+INSERT INTO `idea_great` VALUES ('3', '1', '3');
+INSERT INTO `idea_great` VALUES ('4', '1', '4');
+INSERT INTO `idea_great` VALUES ('5', '1', '5');
+INSERT INTO `idea_great` VALUES ('6', '2', '1');
+INSERT INTO `idea_great` VALUES ('7', '2', '2');
+INSERT INTO `idea_great` VALUES ('16', '2', '3');
+
+-- ----------------------------
 -- Table structure for idea_hobby
 -- ----------------------------
 DROP TABLE IF EXISTS `idea_hobby`;
 CREATE TABLE `idea_hobby` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` int(11) DEFAULT NULL,
-  `hobbyContent` varchar(255) DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL COMMENT '用户id',
+  `hobbyContent` varchar(255) DEFAULT NULL COMMENT '兴趣内容',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -227,11 +263,12 @@ CREATE TABLE `idea_team` (
   `photoName` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_team
 -- ----------------------------
+INSERT INTO `idea_team` VALUES ('1', '1', '1', '15分钟，珠江边上的这座院子带你完成一场小逃离', '1', '10', null, '2018-03-22 10:29:16', 'header2.jpg', null);
 
 -- ----------------------------
 -- Table structure for idea_teammate
@@ -254,25 +291,25 @@ CREATE TABLE `idea_teammate` (
 -- ----------------------------
 DROP TABLE IF EXISTS `idea_user`;
 CREATE TABLE `idea_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `phone` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `email_state_id` int(11) DEFAULT NULL,
-  `nike_name` varchar(255) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
-  `head_photo` varchar(255) DEFAULT NULL,
-  `area` varchar(255) DEFAULT NULL,
-  `specialty` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `phone` varchar(255) DEFAULT NULL COMMENT '用户电话',
+  `email` varchar(255) DEFAULT NULL COMMENT '用户邮箱',
+  `password` varchar(255) DEFAULT NULL COMMENT '密码',
+  `email_state_id` int(11) DEFAULT NULL COMMENT '邮箱状态 0-未激活 1-已激活',
+  `nike_name` varchar(255) DEFAULT NULL COMMENT '昵称',
+  `age` int(11) DEFAULT NULL COMMENT '年龄',
+  `head_photo` varchar(255) DEFAULT NULL COMMENT '头像',
+  `area` varchar(255) DEFAULT NULL COMMENT '所在地',
+  `specialty` varchar(255) DEFAULT NULL COMMENT '特长',
+  `description` varchar(255) DEFAULT NULL COMMENT '个人介绍',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_user
 -- ----------------------------
-INSERT INTO `idea_user` VALUES ('1', '17621538763', '1563274504@qq.com', '123456', '1', '我的密码有你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
-INSERT INTO `idea_user` VALUES ('2', '17621538763', '1563274224@qq.com', '123456', '1', '我的密码有你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
+INSERT INTO `idea_user` VALUES ('1', '18895356968', '1563274504@qq.com', '12345678', '1', '我的密码是你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
+INSERT INTO `idea_user` VALUES ('2', '17621538763', '1563274224@qq.com', '123456', '1', '我的密码是你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
 INSERT INTO `idea_user` VALUES ('3', '17621538763', '1563271204@qq.com', '123456', '1', '我的密码有你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
 INSERT INTO `idea_user` VALUES ('4', '17621538763', '1563274434@qq.com', '123456', '1', '我的密码有你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
 INSERT INTO `idea_user` VALUES ('5', null, '1563270000@qq.com', '123456', null, '我的密码有你名字', null, null, null, null, null);
@@ -281,3 +318,5 @@ INSERT INTO `idea_user` VALUES ('7', null, '156327@qq.com', '123456', null, '我
 INSERT INTO `idea_user` VALUES ('8', null, '1563270@qq.com', '123456', null, '我的密码有你名字', null, null, null, null, null);
 INSERT INTO `idea_user` VALUES ('9', null, '15632701@qq.com', '123456', null, '我的密码有你名字', null, null, null, null, null);
 INSERT INTO `idea_user` VALUES ('10', null, '15632702@qq.com', '123456', null, '我的密码有你名字', null, null, null, null, null);
+INSERT INTO `idea_user` VALUES ('11', null, '1234@qq.com', '1234', null, '未已', null, null, null, null, null);
+INSERT INTO `idea_user` VALUES ('12', null, '123422@qq.com', '123456', null, '帅帅', null, null, null, null, null);
