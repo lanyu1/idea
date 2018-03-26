@@ -110,6 +110,12 @@
     from idea_event e,idea_user u,idea_eventtype et
     where u.`id`=e.`founderId` and e.`type`=et.`id` and e.founderId = #{founderid,jdbcType=INTEGER}
   </select>
+  <select id="selectEventByTitle" parameterType="java.lang.String" resultMap="EventWithUserResultMap">
+    select
+    <include refid="EventsWithUserList"/>
+    from idea_event e,idea_user u,idea_eventtype et
+    where u.`id`=e.`founderId` and e.`type`=et.`id` and e.title = #{title,jdbcType=VARCHAR}
+  </select>
   <select id="selectEventByTime" parameterType="com.hand.idea.domain.EventExample" resultMap="EventWithUserResultMap">
     select
     <include refid="EventsWithUserList"/>

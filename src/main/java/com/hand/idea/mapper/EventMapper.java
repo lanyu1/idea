@@ -22,6 +22,8 @@ public interface EventMapper  {
 
     int insertSelectiveEvent(Event record);
 
+    Event selectEventByTitle(@Param("title") String title);
+
     List<Event> selectByExample(EventExample example);
 
     List<Event> selectEventsWithUser(EventExample example);

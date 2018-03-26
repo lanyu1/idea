@@ -76,6 +76,11 @@ public class EventServiceImpl  implements EventService {
     }
 
     @Override
+    public Event selectEventByTitle(String title) {
+        return eventMapper.selectEventByTitle(title);
+    }
+
+    @Override
     public String addEvent(Event event) {
        int result = eventMapper.insertEvent(event);
        String flag = "插入成功";

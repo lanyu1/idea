@@ -17,6 +17,8 @@ public interface EventService {
 
     public Event selectEvent(Integer id);
 
+    public Event selectEventByTitle(String title);
+
     public String addEvent(Event event);
 
     public Integer deleteEvent(Integer id);

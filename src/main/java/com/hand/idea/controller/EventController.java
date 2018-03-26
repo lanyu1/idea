@@ -1,7 +1,9 @@
 package com.hand.idea.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 import com.hand.idea.domain.Event;
+import com.hand.idea.domain.RequestData;
 import com.hand.idea.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +19,7 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-
+    private RequestData requestData = new RequestData();
     /**
      * 查询所有的创意
      *
@@ -49,7 +51,13 @@ public class EventController {
         PageInfo<Event> pageInfo = eventService.selectEventByTime(page, pageSize);
         return pageInfo;
     }
+    @RequestMapping(value = "/selectByTitle", method = RequestMethod.GET)
+    public Event selectEventByTitle(@RequestParam("title") String title){
 
+        Event event = eventService.selectEventByTitle(title);
+
+        return event;
+    }
     /**
      * 根据创意id查询出创意
      *
@@ -71,8 +79,8 @@ public class EventController {
     @RequestMapping(value = "/addEvent", method = RequestMethod.POST)
     public String addEvent(@RequestBody Event event) {
         eventService.addEvent(event);
-        String flag = "插入成功";
-        return flag;
+        requestData.setMessage("添加成功");
+        return new Gson().toJson(requestData);
     }
 
     /**
