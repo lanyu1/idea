@@ -1,5 +1,7 @@
 package com.hand.idea.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 /**
  * 计划日常实体类
@@ -20,6 +22,19 @@ public class Schedule {
     private Boolean issendemail;
 
     private Boolean issend;
+
+    public Schedule() {
+    }
+
+    public Schedule(Integer id, Integer teamid, String content, Date createtime, Date worktime, Boolean issendemail, Boolean issend) {
+        this.id = id;
+        this.teamid = teamid;
+        this.content = content;
+        this.createtime = createtime;
+        this.worktime = worktime;
+        this.issendemail = issendemail;
+        this.issend = issend;
+    }
 
     public Integer getId() {
         return id;
@@ -44,7 +59,7 @@ public class Schedule {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
-
+    @JsonFormat(pattern="yyyy-MM-dd")
     public Date getCreatetime() {
         return createtime;
     }
@@ -52,7 +67,7 @@ public class Schedule {
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
-
+    @JsonFormat(pattern="yyyy-MM-dd")
     public Date getWorktime() {
         return worktime;
     }

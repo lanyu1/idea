@@ -5,6 +5,8 @@ import com.hand.idea.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by yuLan on 2018/3/22.
  */
@@ -22,6 +24,11 @@ public class TeamController {
         return teamService.selectTeam(id);
     }
 
+    @RequestMapping(value = "/selectTeamList",method = RequestMethod.GET)
+    public List<Team> selectTeamWithCollection(@RequestParam("id") Integer id){
+        return teamService.selectTeamWithCollection(id);
+    }
+
     @RequestMapping(value = "/addTeam",method = RequestMethod.POST)
     public String addTeam(@RequestBody Team team){
         teamService.addTeam(team);
@@ -29,7 +36,7 @@ public class TeamController {
     }
 
 
-    @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteTeam/{id}",method = RequestMethod.GET)
     public String deleteTeam(@PathVariable("id") Integer id){
         teamService.deleteTeam(id);
         return "删除成功";

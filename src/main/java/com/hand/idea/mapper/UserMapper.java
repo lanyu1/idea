@@ -32,6 +32,8 @@ public interface UserMapper {
 
     User searchOneUserByEmail(@Param("email") String email);
 
+    User selectWithUserId(@Param("userId") String userId);
+
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
     int updateByExample(@Param("record") User record, @Param("example") UserExample example);

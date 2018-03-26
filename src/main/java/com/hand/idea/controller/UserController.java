@@ -1,19 +1,30 @@
 package com.hand.idea.controller;
 
+import java.util.HashMap;
 import java.util.List;
-
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import java.util.Map;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
+import com.hand.idea.domain.RequestData;
 import com.hand.idea.domain.User;
+import com.hand.idea.mapper.UserMapper;
 import com.hand.idea.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
 
 import javax.swing.plaf.synth.SynthEditorPaneUI;
 
@@ -21,23 +32,120 @@ import javax.swing.plaf.synth.SynthEditorPaneUI;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    
+
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value="/login",method = RequestMethod.GET)
-	public String login(@RequestParam("email")String email,
-						 @RequestParam("password")String password){
-		User user = userService.login(email,password);
-		if(user!=null){
-          return "1";
+	@Autowired
+	private JavaMailSender javaMailSender;
+
+	@Autowired
+	private TemplateEngine templateEngine;
+
+	@Value("${spring.mail.username}")
+	private String sender;
+
+
+	private RequestData requestData = new RequestData();
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(@RequestBody User user) {
+		List<User> users = userService.getUsers();
+		for (User u : users) {
+			if (u != null && u.getPassword().equals(user.getPassword()) && u.getEmail().equals(user.getEmail())) {
+				if (u.getEmailStateId() == 0) {
+					requestData.setCode("9999");
+					requestData.setState("500");
+					requestData.setMessage("请前往" + user.getEmail() + "邮箱激活");
+					return new Gson().toJson(requestData);
+				}
+				requestData.setMessage("登录成功");
+				return new Gson().toJson(requestData);
+			}
 		}
-       return "-1";
+		requestData.setCode("9999");
+		requestData.setState("500");
+		requestData.setMessage("邮箱不存在或者密码错误");
+		return new Gson().toJson(requestData);
+
+
+	}
+
+	@RequestMapping(value = "activation/{userId}", method = RequestMethod.GET)
+	public void activation(@PathVariable("userId") String userId, HttpServletResponse response) throws IOException {
+		User user = userService.selectWithUserId(userId);
+		if (user != null) {
+			user.setEmailStateId(1);
+			userService.update(user);
 		}
-	@RequestMapping(value="/register", method = RequestMethod.POST)
-    public String regUser(@RequestBody User user){
-		String result = userService.regUser(user);
-		return result;
+		response.sendRedirect("../../success.html");
+	}
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String regUser(@RequestBody User user) {
+		List<User> users = userService.getUsers();
+		for (User u : users) {
+			if (u.getEmail() == user.getEmail()) {
+				requestData.setMessage("该邮箱已经被注册！");
+				requestData.setState("400");
+				return new Gson().toJson(requestData);
+			}
+				// 发送注册邮件
+				String userId = UUID.randomUUID().toString().replace("-", "");
+				user.setUserId(userId);
+				userService.insert(user);
+				sendTemplateMail(user.getEmail(), user.getUserId());
+				requestData.setMessage("注册成功, 快去激活");
+				return new Gson().toJson(requestData);
+
+		}
+		return null;
+	}
+
+	@RequestMapping(value = "/forget", method = RequestMethod.POST)
+	public String forget(@RequestBody User user) {
+		List<User> users = userService.getUsers();
+		for(User u : users) {
+			if(u!=null || u.getEmail()== user.getEmail()) {
+				user.setPassword("666666");
+				userService.update(user);
+				requestData.setMessage("密码已经重置，快去查看你的邮箱");
+				sendSimpleEmail(u.getEmail(), "您好，您密码已重置，初始密码：666666，为了你的安全请尽快修改密码。");
+				return new Gson().toJson(requestData);
+			}
+		}
+		requestData.setCode("9999");
+		requestData.setState("500");
+		requestData.setMessage("无效邮箱");
+		return new Gson().toJson(requestData);
+	}
+	public void sendSimpleEmail(String recipient,String text) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		// 发送者
+		message.setFrom(sender);
+		// 接收者
+		message.setTo(recipient);
+		//邮件主题
+		message.setSubject("开始吧密码重置邮件");
+		// 邮件内容
+		message.setText(text);
+		javaMailSender.send(message);
+	}
+	public void sendTemplateMail(String recipient,String userId) {
+		MimeMessage message = javaMailSender.createMimeMessage();
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			helper.setFrom(sender);
+			helper.setTo(recipient);
+			helper.setSubject("开始吧邮箱验证邮件");
+			Context context = new Context();
+			context.setVariable("id", userId);
+			String emailContent = templateEngine.process("emailTemplate", context);
+			helper.setText(emailContent, true);
+		} catch (MessagingException e) {
+			throw new RuntimeException("Messaging  Exception !", e);
+		}
+		javaMailSender.send(message);
 	}
 	/**
 	 * 根据id来查询用户

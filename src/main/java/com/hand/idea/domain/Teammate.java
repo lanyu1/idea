@@ -5,7 +5,7 @@ package com.hand.idea.domain;
  *
  */
 public class Teammate {
-    private Integer id;
+    private Integer tid;
 
     private Integer teammateid;
 
@@ -13,12 +13,22 @@ public class Teammate {
 
     private String duty;
 
-    public Integer getId() {
-        return id;
+    public Teammate() {
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Teammate(Integer tid, Integer teammateid, Integer authority, String duty) {
+        this.tid = tid;
+        this.teammateid = teammateid;
+        this.authority = authority;
+        this.duty = duty;
+    }
+
+    public Integer getTid() {
+        return tid;
+    }
+
+    public void setTid(Integer tid) {
+        this.tid = tid;
     }
 
     public Integer getTeammateid() {

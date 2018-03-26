@@ -6,6 +6,8 @@ import com.hand.idea.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by yuLan on 2018/3/22.
  */
@@ -33,5 +35,10 @@ public class TeamServiceImpl implements TeamService{
     @Override
     public Team selectTeam(Integer id) {
         return teamMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Team> selectTeamWithCollection(Integer id) {
+        return teamMapper.selectTeamWithCollection(id);
     }
 }

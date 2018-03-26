@@ -2,6 +2,8 @@ package com.hand.idea.service;
 
 import com.hand.idea.domain.Team;
 
+import java.util.List;
+
 
 /**
  * Created by admin on 2017/12/20.
@@ -15,4 +17,6 @@ public interface TeamService {
      public Integer updateTeam(Team team);
 
      public Team selectTeam(Integer id);
+
+     public List<Team> selectTeamWithCollection(Integer id);
 }

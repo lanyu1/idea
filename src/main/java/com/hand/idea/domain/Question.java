@@ -1,5 +1,7 @@
 package com.hand.idea.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 /**
  * 问题墙实体类
@@ -16,6 +18,17 @@ public class Question {
     private String content;
 
     private Date createtime;
+
+    public Question() {
+    }
+
+    public Question(Integer id, Integer teamid, Integer questionerid, String content, Date createtime) {
+        this.id = id;
+        this.teamid = teamid;
+        this.questionerid = questionerid;
+        this.content = content;
+        this.createtime = createtime;
+    }
 
     public Integer getId() {
         return id;
@@ -48,7 +61,7 @@ public class Question {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
-
+    @JsonFormat(pattern="yyyy-MM-dd")
     public Date getCreatetime() {
         return createtime;
     }

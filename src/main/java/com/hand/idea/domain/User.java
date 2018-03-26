@@ -1,6 +1,7 @@
 package com.hand.idea.domain;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 用户实体类
@@ -10,13 +11,15 @@ import java.util.List;
 public class User {
     private Integer id;
 
+    private String userId;
+
     private String phone;
 
     private String email;
 
     private String password;
 
-    private Integer emailStateId;
+    private Integer emailStateId = 0;
 
     private String nikeName;
 
@@ -33,6 +36,11 @@ public class User {
     private List<Event> events;
 
     private List<Hobby> hobbyList;
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
     public User(String email, String password, String nikeName) {
         this.email = email;
@@ -56,6 +64,14 @@ public class User {
 		this.events = events;
 		this.hobbyList = hobbyList;
 	}
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public List<Event> getEvents() {
         return events;
@@ -165,4 +181,23 @@ public class User {
         this.description = description == null ? null : description.trim();
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userId='" + userId + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", emailStateId=" + emailStateId +
+                ", nikeName='" + nikeName + '\'' +
+                ", age=" + age +
+                ", headPhoto='" + headPhoto + '\'' +
+                ", area='" + area + '\'' +
+                ", specialty='" + specialty + '\'' +
+                ", description='" + description + '\'' +
+                ", events=" + events +
+                ", hobbyList=" + hobbyList +
+                '}';
+    }
 }

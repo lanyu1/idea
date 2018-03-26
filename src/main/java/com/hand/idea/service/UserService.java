@@ -10,9 +10,11 @@ public interface UserService {
 
 	public User getUser(Integer id);
 
-	public User login(String email,String password);
+	public User login(User user);
 
 	public User selectUserByEmail(String email);
+
+	public User selectWithUserId(String userId);
 
 	public String regUser(User user);
 

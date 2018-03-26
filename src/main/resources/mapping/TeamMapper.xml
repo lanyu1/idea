@@ -13,6 +13,38 @@
     <result column="photoName" jdbcType="VARCHAR" property="photoname" />
     <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
+  <resultMap id="ResultMapWithCollection" type="com.hand.idea.domain.Team">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="founderId" jdbcType="INTEGER" property="founderid" />
+    <result column="eventId" jdbcType="INTEGER" property="eventid" />
+    <result column="teamName" jdbcType="VARCHAR" property="teamname" />
+    <result column="teammateNumber" jdbcType="INTEGER" property="teammatenumber" />
+    <result column="maxTeammateNumber" jdbcType="INTEGER" property="maxteammatenumber" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="photoName" jdbcType="VARCHAR" property="photoname" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <collection property="teammates" ofType="Teammate">
+      <id column="id" jdbcType="INTEGER" property="tid" />
+      <result column="teammateId" jdbcType="INTEGER" property="teammateid" />
+      <result column="authority" jdbcType="INTEGER" property="authority" />
+      <result column="duty" jdbcType="VARCHAR" property="duty" />
+    </collection>
+    <collection property="questions" ofType="Question">
+      <id column="id" jdbcType="INTEGER" property="teamid" />
+      <result column="questionerId" jdbcType="INTEGER" property="questionerid" />
+      <result column="content" jdbcType="VARCHAR" property="content" />
+      <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    </collection>
+    <collection property="schedules" ofType="Schedule">
+      <id column="id" jdbcType="INTEGER" property="teamid" />
+      <result column="content" jdbcType="VARCHAR" property="content" />
+      <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+      <result column="workTime" jdbcType="TIMESTAMP" property="worktime" />
+      <result column="isSendEmail" jdbcType="BIT" property="issendemail" />
+      <result column="isSend" jdbcType="BIT" property="issend" />
+    </collection>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -75,6 +107,20 @@
     id, founderId, eventId, teamName, teammateNumber, maxTeammateNumber, notice, createTime, 
     photoName, description
   </sql>
+  <sql id="Column_List_Collection">
+    t.id, t.founderId, t.eventId, t.teamName, t.teammateNumber, t.maxTeammateNumber, t.notice, t.createTime,
+    t.photoName, t.description, tm.teammateId, tm.authority, tm.duty, q.questionerId, q.content, q.createTime,
+    s.content, s.createTime, s.workTime, s.isSendEmail, s.isSend
+  </sql>
+  <select id="selectTeamWithCollection" parameterType="java.lang.Integer" resultMap="ResultMapWithCollection">
+    select
+    <include refid="Column_List_Collection" />
+    from idea_team t
+    cross join idea_teammate tm on t.id = tm.id
+    cross join idea_question q on t.id = q.teamId
+    cross join idea_schedule s on t.id = s.teamId
+    and t.id = #{id,jdbcType=INTEGER}
+  </select>
   <select id="selectByExample" parameterType="com.hand.idea.domain.TeamExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

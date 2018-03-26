@@ -18,6 +18,8 @@ public interface TeamMapper {
 
     List<Team> selectByExample(TeamExample example);
 
+    List<Team> selectTeamWithCollection(Integer id);
+
     Team selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Team record, @Param("example") TeamExample example);

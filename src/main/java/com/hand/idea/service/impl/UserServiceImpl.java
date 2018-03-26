@@ -16,16 +16,16 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
 
-	public User login(String email, String password) {
-		if (email == null && email=="" && password == null && password=="" ) {
+	public User login(User user) {
+		if (user.getEmail()==null && user.getPassword()==null ) {
 			return null;
 		} else {
 			//通过邮箱来判断用户是否唯一
-			User user = userMapper.selectUserOrUnique(email);
-			if (user!=null) {
-				if(user.getPassword().equals(password)){
+			User u = userMapper.selectUserOrUnique(user.getEmail());
+			if (u!=null) {
+				if(u.getPassword().equals(user.getPassword())){
 					//通过邮箱和密码来判断用户是否存在
-					User userUnique = userMapper.searchOneUser(email,password);
+					User userUnique = userMapper.searchOneUser(u.getEmail(),u.getPassword());
 					return userUnique;
 				}else{
 					return null;
@@ -39,6 +39,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User selectUserByEmail(String email) {
 		return userMapper.searchOneUserByEmail(email);
+	}
+
+	@Override
+	public User selectWithUserId(String userId) {
+		return userMapper.selectWithUserId(userId);
 	}
 
 	@Override
