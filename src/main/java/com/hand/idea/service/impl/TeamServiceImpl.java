@@ -38,7 +38,7 @@ public class TeamServiceImpl implements TeamService{
     }
 
     @Override
-    public List<Team> selectTeamWithCollection(Integer id) {
-        return teamMapper.selectTeamWithCollection(id);
+    public List<Team> selectTeamWithCollection(Integer founderid,Integer eventid) {
+        return teamMapper.selectTeamWithCollection(founderid,eventid);
     }
 }

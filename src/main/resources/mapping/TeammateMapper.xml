@@ -3,6 +3,7 @@
 <mapper namespace="com.hand.idea.mapper.TeammateMapper">
   <resultMap id="BaseResultMap" type="com.hand.idea.domain.Teammate">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="teamId" jdbcType="INTEGER" property="teamid" />
     <result column="teammateId" jdbcType="INTEGER" property="teammateid" />
     <result column="authority" jdbcType="INTEGER" property="authority" />
     <result column="duty" jdbcType="VARCHAR" property="duty" />
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, teammateId, authority, duty
+    id, teamId, teammateId, authority, duty
   </sql>
   <select id="selectByExample" parameterType="com.hand.idea.domain.TeammateExample" resultMap="BaseResultMap">
     select
@@ -99,16 +100,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hand.idea.domain.Teammate">
-    insert into idea_teammate (id, teammateId, authority, 
-      duty)
-    values (#{id,jdbcType=INTEGER}, #{teammateid,jdbcType=INTEGER}, #{authority,jdbcType=INTEGER}, 
-      #{duty,jdbcType=VARCHAR})
+    insert into idea_teammate (id, teamId, teammateId, 
+      authority, duty)
+    values (#{id,jdbcType=INTEGER}, #{teamid,jdbcType=INTEGER}, #{teammateid,jdbcType=INTEGER}, 
+      #{authority,jdbcType=INTEGER}, #{duty,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hand.idea.domain.Teammate">
     insert into idea_teammate
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="teamid != null">
+        teamId,
       </if>
       <if test="teammateid != null">
         teammateId,
@@ -123,6 +127,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
+      </if>
+      <if test="teamid != null">
+        #{teamid,jdbcType=INTEGER},
       </if>
       <if test="teammateid != null">
         #{teammateid,jdbcType=INTEGER},
@@ -147,6 +154,9 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.teamid != null">
+        teamId = #{record.teamid,jdbcType=INTEGER},
+      </if>
       <if test="record.teammateid != null">
         teammateId = #{record.teammateid,jdbcType=INTEGER},
       </if>
@@ -164,6 +174,7 @@
   <update id="updateByExample" parameterType="map">
     update idea_teammate
     set id = #{record.id,jdbcType=INTEGER},
+      teamId = #{record.teamid,jdbcType=INTEGER},
       teammateId = #{record.teammateid,jdbcType=INTEGER},
       authority = #{record.authority,jdbcType=INTEGER},
       duty = #{record.duty,jdbcType=VARCHAR}
@@ -174,6 +185,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.hand.idea.domain.Teammate">
     update idea_teammate
     <set>
+      <if test="teamid != null">
+        teamId = #{teamid,jdbcType=INTEGER},
+      </if>
       <if test="teammateid != null">
         teammateId = #{teammateid,jdbcType=INTEGER},
       </if>
@@ -188,7 +202,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hand.idea.domain.Teammate">
     update idea_teammate
-    set teammateId = #{teammateid,jdbcType=INTEGER},
+    set teamId = #{teamid,jdbcType=INTEGER},
+      teammateId = #{teammateid,jdbcType=INTEGER},
       authority = #{authority,jdbcType=INTEGER},
       duty = #{duty,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

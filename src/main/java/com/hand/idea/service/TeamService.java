@@ -18,5 +18,5 @@ public interface TeamService {
 
      public Team selectTeam(Integer id);
 
-     public List<Team> selectTeamWithCollection(Integer id);
+     public List<Team> selectTeamWithCollection(Integer founderid,Integer eventid);
 }

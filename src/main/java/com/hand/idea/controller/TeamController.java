@@ -29,8 +29,9 @@ public class TeamController {
     }
 
     @RequestMapping(value = "/selectTeamList",method = RequestMethod.GET)
-    public List<Team> selectTeamWithCollection(@RequestParam("id") Integer id){
-        return teamService.selectTeamWithCollection(id);
+    public List<Team> selectTeamWithCollection(@RequestParam("founderid") Integer founderid,
+                                               @RequestParam("eventid") Integer eventid){
+        return teamService.selectTeamWithCollection(founderid,eventid);
     }
 
     @RequestMapping(value = "/addTeam",method = RequestMethod.POST)

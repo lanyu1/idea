@@ -26,6 +26,7 @@
     <result column="description" jdbcType="VARCHAR" property="description" />
     <collection property="teammates" ofType="Teammate">
       <id column="id" jdbcType="INTEGER" property="tid" />
+      <result column="teamId" jdbcType="INTEGER" property="teamid" />
       <result column="teammateId" jdbcType="INTEGER" property="teammateid" />
       <result column="authority" jdbcType="INTEGER" property="authority" />
       <result column="duty" jdbcType="VARCHAR" property="duty" />
@@ -109,17 +110,17 @@
   </sql>
   <sql id="Column_List_Collection">
     t.id, t.founderId, t.eventId, t.teamName, t.teammateNumber, t.maxTeammateNumber, t.notice, t.createTime,
-    t.photoName, t.description, tm.teammateId, tm.authority, tm.duty, q.questionerId, q.content, q.createTime,
+    t.photoName, t.description, tm.teamId,tm.teammateId, tm.authority, tm.duty, q.questionerId, q.content, q.createTime,
     s.content, s.createTime, s.workTime, s.isSendEmail, s.isSend
   </sql>
-  <select id="selectTeamWithCollection" parameterType="java.lang.Integer" resultMap="ResultMapWithCollection">
+  <select id="selectTeamWithCollection" parameterType="com.hand.idea.domain.TeamExample" resultMap="ResultMapWithCollection">
     select
     <include refid="Column_List_Collection" />
     from idea_team t
-    cross join idea_teammate tm on t.id = tm.id
+    cross join idea_teammate tm on t.id = tm.teamId
     cross join idea_question q on t.id = q.teamId
     cross join idea_schedule s on t.id = s.teamId
-    and t.id = #{id,jdbcType=INTEGER}
+    and t.founderId = #{founderid,jdbcType=INTEGER} and t.eventId =#{eventid,jdbcType=INTEGER}
   </select>
   <select id="selectByExample" parameterType="com.hand.idea.domain.TeamExample" resultMap="BaseResultMap">
     select

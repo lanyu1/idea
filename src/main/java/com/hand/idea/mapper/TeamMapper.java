@@ -18,7 +18,7 @@ public interface TeamMapper {
 
     List<Team> selectByExample(TeamExample example);
 
-    List<Team> selectTeamWithCollection(Integer id);
+    List<Team> selectTeamWithCollection(@Param("founderid") Integer founderid,@Param("eventid") Integer eventid);
 
     Team selectByPrimaryKey(Integer id);
 

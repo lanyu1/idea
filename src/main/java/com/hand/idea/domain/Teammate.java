@@ -7,6 +7,8 @@ package com.hand.idea.domain;
 public class Teammate {
     private Integer tid;
 
+    private Integer teamid;
+
     private Integer teammateid;
 
     private Integer authority;
@@ -16,8 +18,9 @@ public class Teammate {
     public Teammate() {
     }
 
-    public Teammate(Integer tid, Integer teammateid, Integer authority, String duty) {
+    public Teammate(Integer tid, Integer teamid, Integer teammateid, Integer authority, String duty) {
         this.tid = tid;
+        this.teamid = teamid;
         this.teammateid = teammateid;
         this.authority = authority;
         this.duty = duty;
@@ -29,6 +32,14 @@ public class Teammate {
 
     public void setTid(Integer tid) {
         this.tid = tid;
+    }
+
+    public Integer getTeamid() {
+        return teamid;
+    }
+
+    public void setTeamid(Integer teamid) {
+        this.teamid = teamid;
     }
 
     public Integer getTeammateid() {
