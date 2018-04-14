@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2018-03-24 10:15:34
+Date: 2018-03-31 09:32:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,7 +58,7 @@ CREATE TABLE `idea_event` (
   `instruction` varchar(255) DEFAULT NULL,
   `support` int(11) DEFAULT NULL,
   PRIMARY KEY (`eid`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_event
@@ -114,11 +114,11 @@ INSERT INTO `idea_event` VALUES ('48', '4', '颜匠，开启社区美甲店的�
 INSERT INTO `idea_event` VALUES ('49', '1', '测试项目', '2', 'canyin16.jpg', '南京', '江苏', null, '2018-01-10 08:00:00', null, '这里是对于测试项目的描述', '3');
 INSERT INTO `idea_event` VALUES ('50', '2', '用一瓶精酿觉醒，与所有庸碌为敌', '2', 'canyin15.jpg', '苏州', '江苏', null, '2018-01-10 10:00:00', null, '虽然我们都是小城青年，但是也想为自己发声，呼吁更多独立先锋的新事物来到我们身边。半闲精酿是来自于安徽黄山小城的第一款地方精酿', '5');
 INSERT INTO `idea_event` VALUES ('51', '3', '在厦门，亚太金奖设计师与不安分的地产商造了一家穿越时空的酒店', '1', 'minsu13.jpg', '厦门', '福建', null, '2018-01-11 08:00:00', null, '融合东方西方，穿越旧城老巷；蓝山越造就一份极致，只为等你。我希望她不仅是酒店，更是传达美学设计的平台，是一个有温度的舒适港湾。', '56');
-INSERT INTO `idea_event` VALUES ('52', '3', '测试项目餐饮17', '2', 'canyin17.jpg', '上海', '上海', null, '2018-03-10 08:00:00', null, '这里是测试项目17的项目描述', '4');
+INSERT INTO `idea_event` VALUES ('52', '3', '测试项目餐饮17', '2', 'canyin17.jpg', '上海', '上海', null, '2018-03-10 08:00:00', null, '这里是测试项目17的项目描述', '5');
 INSERT INTO `idea_event` VALUES ('53', '2', '测试餐饮项目18', '2', 'canyin18.jpg', '南京', '江苏', null, '2018-03-10 08:00:00', null, '这里是测试餐饮项目18', '3');
 INSERT INTO `idea_event` VALUES ('55', '4', '测试项目餐饮11', '2', 'canyin11.jpg', '杭州', '浙江', null, '2018-03-10 08:00:00', null, '这里是对测试项目餐饮11的项目描述', '1');
-INSERT INTO `idea_event` VALUES ('56', '1', '测试项目农业12', '3', 'nongye12.jpg', '厦门', '福建', null, '2018-03-10 08:00:00', null, '这里是测试项目农业12的项目描述', '2');
-INSERT INTO `idea_event` VALUES ('57', '1', '测试休闲项目', '4', 'xiuxian1.jpg', '上海', '上海', null, '2018-03-10 08:00:00', null, '这里是对于测试休闲项目的项目描述', '3');
+INSERT INTO `idea_event` VALUES ('56', '1', '测试项目农业12', '3', 'nongye12.jpg', '厦门', '福建', null, '2018-03-10 08:00:00', null, '这里是测试项目农业12的项目描述', '3');
+INSERT INTO `idea_event` VALUES ('79', '1', '餐饮项目19', '2', 'canyin19.jpg', '上海', '上海', null, '2018-03-25 08:00:00', null, '这里是对餐饮项目19的项目描述', '1');
 
 -- ----------------------------
 -- Table structure for idea_eventtype
@@ -147,7 +147,7 @@ CREATE TABLE `idea_great` (
   `eventId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_great
@@ -160,6 +160,9 @@ INSERT INTO `idea_great` VALUES ('5', '1', '5');
 INSERT INTO `idea_great` VALUES ('6', '2', '1');
 INSERT INTO `idea_great` VALUES ('7', '2', '2');
 INSERT INTO `idea_great` VALUES ('16', '2', '3');
+INSERT INTO `idea_great` VALUES ('25', '56', '1');
+INSERT INTO `idea_great` VALUES ('33', '52', '3');
+INSERT INTO `idea_great` VALUES ('34', '79', '1');
 
 -- ----------------------------
 -- Table structure for idea_hobby
@@ -205,11 +208,13 @@ CREATE TABLE `idea_question` (
   `content` varchar(255) DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_question
 -- ----------------------------
+INSERT INTO `idea_question` VALUES ('1', '1', '1', '项目什么时候结束', '2018-03-25 09:18:01');
+INSERT INTO `idea_question` VALUES ('2', '23', '1', '暂无问题', '2018-03-27 10:08:53');
 
 -- ----------------------------
 -- Table structure for idea_reply
@@ -241,11 +246,13 @@ CREATE TABLE `idea_schedule` (
   `isSendEmail` tinyint(4) DEFAULT NULL,
   `isSend` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_schedule
 -- ----------------------------
+INSERT INTO `idea_schedule` VALUES ('1', '1', '创建了该小组', '2018-03-24 08:16:00', '2018-03-25 09:17:42', '0', '0');
+INSERT INTO `idea_schedule` VALUES ('2', '23', '小组创建成功', '2018-03-27 10:09:12', '2018-03-27 10:09:16', '0', '0');
 
 -- ----------------------------
 -- Table structure for idea_team
@@ -263,12 +270,14 @@ CREATE TABLE `idea_team` (
   `photoName` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_team
 -- ----------------------------
 INSERT INTO `idea_team` VALUES ('1', '1', '1', '15分钟，珠江边上的这座院子带你完成一场小逃离', '1', '10', null, '2018-03-22 10:29:16', 'header2.jpg', null);
+INSERT INTO `idea_team` VALUES ('2', '2', '2', '秀酒店进驻杭州，八位设计大咖携Each助力，十年一剑众星捧月', '1', '10', '这是一个公告', '2018-03-24 08:00:00', 'header2.jpg', '这是秀酒店进驻杭州，八位设计大咖携Each助力，十年一剑众星捧月项目的小组描述');
+INSERT INTO `idea_team` VALUES ('23', '1', '79', '餐饮项目19', '1', '10', '这是一个公告', '2018-03-25 08:00:00', 'canyin19.jpg', '这里是对餐饮项目19的项目描述');
 
 -- ----------------------------
 -- Table structure for idea_teammate
@@ -276,15 +285,18 @@ INSERT INTO `idea_team` VALUES ('1', '1', '1', '15分钟，珠江边上的这座
 DROP TABLE IF EXISTS `idea_teammate`;
 CREATE TABLE `idea_teammate` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `teamId` int(11) NOT NULL,
   `teammateId` int(11) DEFAULT NULL,
   `authority` int(11) DEFAULT NULL,
   `duty` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_teammate
 -- ----------------------------
+INSERT INTO `idea_teammate` VALUES ('1', '1', '1', '1', '组长');
+INSERT INTO `idea_teammate` VALUES ('2', '23', '1', '1', '组长');
 
 -- ----------------------------
 -- Table structure for idea_user
@@ -292,6 +304,7 @@ CREATE TABLE `idea_teammate` (
 DROP TABLE IF EXISTS `idea_user`;
 CREATE TABLE `idea_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `userId` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL COMMENT '用户电话',
   `email` varchar(255) DEFAULT NULL COMMENT '用户邮箱',
   `password` varchar(255) DEFAULT NULL COMMENT '密码',
@@ -303,20 +316,20 @@ CREATE TABLE `idea_user` (
   `specialty` varchar(255) DEFAULT NULL COMMENT '特长',
   `description` varchar(255) DEFAULT NULL COMMENT '个人介绍',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of idea_user
 -- ----------------------------
-INSERT INTO `idea_user` VALUES ('1', '18895356968', '1563274504@qq.com', '12345678', '1', '我的密码是你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
-INSERT INTO `idea_user` VALUES ('2', '17621538763', '1563274224@qq.com', '123456', '1', '我的密码是你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
-INSERT INTO `idea_user` VALUES ('3', '17621538763', '1563271204@qq.com', '123456', '1', '我的密码有你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
-INSERT INTO `idea_user` VALUES ('4', '17621538763', '1563274434@qq.com', '123456', '1', '我的密码有你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
-INSERT INTO `idea_user` VALUES ('5', null, '1563270000@qq.com', '123456', null, '我的密码有你名字', null, null, null, null, null);
-INSERT INTO `idea_user` VALUES ('6', null, '1563270900@qq.com', '123456', null, '我的密码有你名字', null, null, null, null, null);
-INSERT INTO `idea_user` VALUES ('7', null, '156327@qq.com', '123456', null, '我的密码有你名字', null, null, null, null, null);
-INSERT INTO `idea_user` VALUES ('8', null, '1563270@qq.com', '123456', null, '我的密码有你名字', null, null, null, null, null);
-INSERT INTO `idea_user` VALUES ('9', null, '15632701@qq.com', '123456', null, '我的密码有你名字', null, null, null, null, null);
-INSERT INTO `idea_user` VALUES ('10', null, '15632702@qq.com', '123456', null, '我的密码有你名字', null, null, null, null, null);
-INSERT INTO `idea_user` VALUES ('11', null, '1234@qq.com', '1234', null, '未已', null, null, null, null, null);
-INSERT INTO `idea_user` VALUES ('12', null, '123422@qq.com', '123456', null, '帅帅', null, null, null, null, null);
+INSERT INTO `idea_user` VALUES ('1', null, '18895356968', '1563274504@qq.com', '12345678', '1', '我的密码是你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
+INSERT INTO `idea_user` VALUES ('2', null, '17621538763', '1563274224@qq.com', '123456', '0', '我的密码是你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
+INSERT INTO `idea_user` VALUES ('3', null, '17621538763', '1563271204@qq.com', '123456', '0', '我的密码有你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
+INSERT INTO `idea_user` VALUES ('4', null, '17621538763', '1563274434@qq.com', '123456', '0', '我的密码有你名字', '22', 'header2.jpg', '上海', '看书', '我来自上海，是一名程序员');
+INSERT INTO `idea_user` VALUES ('5', null, null, '1563270000@qq.com', '123456', '0', '我的密码有你名字', null, null, null, null, null);
+INSERT INTO `idea_user` VALUES ('6', null, null, '1563270900@qq.com', '123456', '0', '我的密码有你名字', null, null, null, null, null);
+INSERT INTO `idea_user` VALUES ('7', null, null, '156327@qq.com', '123456', '0', '我的密码有你名字', null, null, null, null, null);
+INSERT INTO `idea_user` VALUES ('8', null, null, '1563270@qq.com', '123456', '0', '我的密码有你名字', null, null, null, null, null);
+INSERT INTO `idea_user` VALUES ('9', null, null, '15632701@qq.com', '123456', '0', '我的密码有你名字', null, null, null, null, null);
+INSERT INTO `idea_user` VALUES ('10', null, null, '15632702@qq.com', '123456', '0', '我的密码有你名字', null, null, null, null, null);
+INSERT INTO `idea_user` VALUES ('11', null, null, '1234@qq.com', '1234', '0', '未已', null, null, null, null, null);
+INSERT INTO `idea_user` VALUES ('12', null, null, '123422@qq.com', '123456', '1', '帅帅', null, null, null, null, null);

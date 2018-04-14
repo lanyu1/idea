@@ -34,12 +34,12 @@
     <collection property="questions" ofType="Question">
       <id column="id" jdbcType="INTEGER" property="teamid" />
       <result column="questionerId" jdbcType="INTEGER" property="questionerid" />
-      <result column="content" jdbcType="VARCHAR" property="content" />
+      <result column="qcontent" jdbcType="VARCHAR" property="content" />
       <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
     </collection>
     <collection property="schedules" ofType="Schedule">
       <id column="id" jdbcType="INTEGER" property="teamid" />
-      <result column="content" jdbcType="VARCHAR" property="content" />
+      <result column="scontent" jdbcType="VARCHAR" property="content" />
       <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
       <result column="workTime" jdbcType="TIMESTAMP" property="worktime" />
       <result column="isSendEmail" jdbcType="BIT" property="issendemail" />
@@ -110,8 +110,8 @@
   </sql>
   <sql id="Column_List_Collection">
     t.id, t.founderId, t.eventId, t.teamName, t.teammateNumber, t.maxTeammateNumber, t.notice, t.createTime,
-    t.photoName, t.description, tm.teamId,tm.teammateId, tm.authority, tm.duty, q.questionerId, q.content, q.createTime,
-    s.content, s.createTime, s.workTime, s.isSendEmail, s.isSend
+    t.photoName, t.description, tm.teamId,tm.teammateId, tm.authority, tm.duty, q.questionerId, q.content qcontent, q.createTime,
+    s.content scontent, s.createTime, s.workTime, s.isSendEmail, s.isSend
   </sql>
   <select id="selectTeamWithCollection" parameterType="com.hand.idea.domain.TeamExample" resultMap="ResultMapWithCollection">
     select
