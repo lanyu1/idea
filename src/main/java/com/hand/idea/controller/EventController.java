@@ -121,10 +121,10 @@ public class EventController {
         return pageInfo;
     }
     @RequestMapping(value = "/getSearchEvents", method = RequestMethod.GET)
-    public PageInfo<Event> searchEvents(@RequestParam("searchContent") String searchContent,
+    public PageInfo<Event> searchEvents(@RequestParam(value="selectWord",required = false) String selectWord,
                                              @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                              @RequestParam(value = "pageSize", required = false, defaultValue = "6") Integer pageSize) {
-        PageInfo<Event> pageInfo = eventService.searchEvents(searchContent, page, pageSize);
+        PageInfo<Event> pageInfo = eventService.searchEvents(selectWord, page, pageSize);
         return pageInfo;
     }
 }
