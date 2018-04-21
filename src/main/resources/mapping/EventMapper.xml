@@ -134,9 +134,10 @@
     select distinct
     <include refid="EventsWithUserList"/>
     from idea_event e,idea_user u,idea_eventtype et
+    where u.`id`=e.`founderId` and e.`type`=et.`id`
     <if test="selectWord!=null">
-     where  u.`id`=e.`founderId` and e.`type`=et.`id` and
-      concat(e.title,e.city,et.typeContent) like '%' #{selectWord} '%'
+       and ( e.city like CONCAT('%', #{searchWord},'%') or
+      e.title like CONCAT('%', #{searchWord},'%') or et.typeContent like CONCAT('%', #{searchWord},'%') )
     </if>
   </select>
 
