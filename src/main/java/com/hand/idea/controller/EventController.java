@@ -86,12 +86,12 @@ public class EventController {
     /**
      * 根据创意id删除创意
      *
-     * @param id
+     * @param eid
      * @return
      */
-    @RequestMapping(value = "/deleteEvent/{id}", method = RequestMethod.DELETE)
-    public String deleteEvent(@PathVariable("id") Integer id) {
-        eventService.deleteEvent(id);
+    @RequestMapping(value = "/deleteEvent", method = RequestMethod.DELETE)
+    public String deleteEvent(@RequestParam("eid") Integer eid) {
+        eventService.deleteEvent(eid);
         return "删除成功";
     }
 
@@ -121,10 +121,11 @@ public class EventController {
         return pageInfo;
     }
     @RequestMapping(value = "/getSearchEvents", method = RequestMethod.GET)
-    public PageInfo<Event> searchEvents(@RequestParam(value="selectWord",required = false) String selectWord,
+    public PageInfo<Event> searchEvents(@RequestParam(value="searchContent") String searchContent,
+                                        @RequestParam(value="typeContent") String typeContent,
                                              @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                              @RequestParam(value = "pageSize", required = false, defaultValue = "6") Integer pageSize) {
-        PageInfo<Event> pageInfo = eventService.searchEvents(selectWord, page, pageSize);
+        PageInfo<Event> pageInfo = eventService.searchEvents(searchContent,typeContent, page, pageSize);
         return pageInfo;
     }
 }

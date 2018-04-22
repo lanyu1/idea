@@ -37,7 +37,7 @@ public class GreatController {
             Event event = eventService.selectEvent(eventid);
             event.setSupport(event.getSupport()-1);
             eventService.updateEvent(event);
-            return "已经支持了";
+            return "已经支持了,支持人数-1";
         }else{
             //如果没有找到这条记录，则添加这条记录，同时文章点赞数加1
             Great great = new Great();
@@ -47,7 +47,7 @@ public class GreatController {
             Event event = eventService.selectEvent(eventid);
             event.setSupport(event.getSupport()+1);
             eventService.updateEvent(event);
-            return "支持成功！";
+            return "支持成功,支持人数+1";
         }
     }
 

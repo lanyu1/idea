@@ -91,12 +91,13 @@ public class EventServiceImpl  implements EventService {
     }
 
     @Override
-    public Integer deleteEvent(Integer id) {
-        return eventMapper.deleteByPrimaryKey(id);
+    public Integer deleteEvent(Integer eid) {
+        return eventMapper.deleteByPrimaryKey(eid);
     }
 
     @Override
     public Integer updateEvent(Event event) {
+
         return eventMapper.updateByPrimaryKeySelective(event);
     }
 
@@ -109,9 +110,9 @@ public class EventServiceImpl  implements EventService {
     }
 
     @Override
-    public PageInfo<Event> searchEvents(String searchContent, Integer page, Integer pageSize) {
+    public PageInfo<Event> searchEvents(String searchContent, String typeContent,Integer page, Integer pageSize) {
         PageHelper.startPage(page, pageSize);
-        List<Event> events = eventMapper.searchEvents(searchContent);
+        List<Event> events = eventMapper.searchEvents(searchContent,typeContent);
         PageInfo<Event> pageInfo = new PageInfo<Event>(events);
         return pageInfo;
     }

@@ -21,11 +21,11 @@ public interface EventService {
 
     public String addEvent(Event event);
 
-    public Integer deleteEvent(Integer id);
+    public Integer deleteEvent(Integer eid);
 
     public Integer updateEvent(Event event);
 
     public PageInfo<Event> selectByEventType(Integer type,Integer page,Integer pageSize);
 
-    public PageInfo<Event> searchEvents(String searchContent,Integer page,Integer pageSize);
+    public PageInfo<Event> searchEvents(String searchContent,String typeContent,Integer page,Integer pageSize);
 }

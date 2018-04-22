@@ -12,7 +12,7 @@ public interface EventMapper  {
 
     int deleteByExample(EventExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(@Param("eid") Integer eid);
 
     int insert(Event record);
 
@@ -34,7 +34,7 @@ public interface EventMapper  {
 
     List<Event> selectByEventType(Integer type);
 
-    List<Event> searchEvents(@Param("selectWord") String  selectWord);
+    List<Event> searchEvents(@Param("searchContent") String  selectContent,@Param("typeContent") String  typeContent);
 
     Event selectByPrimaryKey(Integer id);
 

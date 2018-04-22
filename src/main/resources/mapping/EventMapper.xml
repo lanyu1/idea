@@ -135,9 +135,11 @@
     <include refid="EventsWithUserList"/>
     from idea_event e,idea_user u,idea_eventtype et
     where u.`id`=e.`founderId` and e.`type`=et.`id`
-    <if test="selectWord!=null">
-       and ( e.city like CONCAT('%', #{searchWord},'%') or
-      e.title like CONCAT('%', #{searchWord},'%') or et.typeContent like CONCAT('%', #{searchWord},'%') )
+    <if test="typeContent!=null">
+        and et.typeContent = #{typeContent,jdbcType=VARCHAR}
+    </if>
+    <if test="searchContent!=null">
+       and ( e.city like CONCAT('%', #{searchContent},'%') or e.title like CONCAT('%', #{searchContent},'%') or et.typeContent like CONCAT('%', #{searchContent},'%')or e.instruction like CONCAT('%', #{searchContent},'%') )
     </if>
   </select>
 
@@ -171,7 +173,7 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from idea_event
-    where id = #{id,jdbcType=INTEGER}
+    where eid = #{eid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.hand.idea.domain.EventExample">
     delete from idea_event
