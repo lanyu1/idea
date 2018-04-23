@@ -45,6 +45,28 @@
       <result column="isSendEmail" jdbcType="BIT" property="issendemail" />
       <result column="isSend" jdbcType="BIT" property="issend" />
     </collection>
+    <collection property="user" javaType="User">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="nike_name" jdbcType="VARCHAR" property="nikename" />
+    </collection>
+  </resultMap>
+  <resultMap id="ResultMapWithTeamList" type="com.hand.idea.domain.Team">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="founderId" jdbcType="INTEGER" property="founderid" />
+    <result column="eventId" jdbcType="INTEGER" property="eventid" />
+    <result column="teamName" jdbcType="VARCHAR" property="teamname" />
+    <result column="teammateNumber" jdbcType="INTEGER" property="teammatenumber" />
+    <result column="maxTeammateNumber" jdbcType="INTEGER" property="maxteammatenumber" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="photoName" jdbcType="VARCHAR" property="photoname" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <association property="users" javaType="User">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="email" jdbcType="VARCHAR" property="email" />
+      <result column="password" jdbcType="VARCHAR" property="password" />
+      <result column="nike_name" jdbcType="VARCHAR" property="nikeName" />
+    </association>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -121,6 +143,20 @@
     cross join idea_question q on t.id = q.teamId
     cross join idea_schedule s on t.id = s.teamId
     and t.founderId = #{founderid,jdbcType=INTEGER} and t.eventId =#{eventid,jdbcType=INTEGER}
+  </select>
+  <select id="selectTeamListByLike" parameterType="com.hand.idea.domain.TeamExample" resultMap="ResultMapWithTeamList">
+    SELECT
+    t.*,
+    u.nike_name
+    FROM
+    idea_team t,idea_user u
+    <where>
+      <if test="searchContent!=null">
+        ( t.teamName like CONCAT('%', #{searchContent},'%') or t.notice like CONCAT('%', #{searchContent},'%') or t.description like CONCAT('%', #{searchContent},'%') )
+      </if>
+      and u.id=t.founderId
+    </where>
+
   </select>
   <select id="selectByExample" parameterType="com.hand.idea.domain.TeamExample" resultMap="BaseResultMap">
     select

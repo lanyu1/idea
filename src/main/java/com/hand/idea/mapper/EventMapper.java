@@ -36,7 +36,7 @@ public interface EventMapper  {
 
     List<Event> searchEvents(@Param("searchContent") String  selectContent,@Param("typeContent") String  typeContent);
 
-    List<Event> searchEventsByLike(@Param("searchContent") String  selectContent);
+    List<Event> searchEventsByLike(@Param("searchContent") String  searchContent);
 
     Event selectByPrimaryKey(Integer id);
 

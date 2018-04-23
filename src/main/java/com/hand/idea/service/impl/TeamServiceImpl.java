@@ -1,5 +1,8 @@
 package com.hand.idea.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.hand.idea.domain.Event;
 import com.hand.idea.domain.Team;
 import com.hand.idea.mapper.TeamMapper;
 import com.hand.idea.service.TeamService;
@@ -40,5 +43,13 @@ public class TeamServiceImpl implements TeamService{
     @Override
     public List<Team> selectTeamWithCollection(Integer founderid,Integer eventid) {
         return teamMapper.selectTeamWithCollection(founderid,eventid);
+    }
+
+    @Override
+    public PageInfo<Team> selectTeamList(String searchContent, Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+        List<Team> teamList = teamMapper.selectTeamListByLike(searchContent);
+        PageInfo<Team> pageInfo = new PageInfo<Team>(teamList);
+        return pageInfo;
     }
 }

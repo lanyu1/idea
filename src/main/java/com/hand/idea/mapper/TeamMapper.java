@@ -16,6 +16,8 @@ public interface TeamMapper {
 
     int insertSelective(Team record);
 
+    List<Team> selectTeamListByLike(@Param("searchContent") String  searchContent);
+
     List<Team> selectByExample(TeamExample example);
 
     List<Team> selectTeamWithCollection(@Param("founderid") Integer founderid,@Param("eventid") Integer eventid);
