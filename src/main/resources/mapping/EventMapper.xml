@@ -129,18 +129,30 @@
     from idea_event e,idea_user u,idea_eventtype et
     where u.`id`=e.`founderId` and e.`type`=et.`id`
   </select>
-
-  <select id="searchEvents" parameterType="com.hand.idea.domain.EventExample" resultMap="EventWithUserResultMap">
+  <select id="searchEventsByLike" parameterType="com.hand.idea.domain.EventExample" resultMap="EventWithUserResultMap">
     select distinct
     <include refid="EventsWithUserList"/>
     from idea_event e,idea_user u,idea_eventtype et
-    where u.`id`=e.`founderId` and e.`type`=et.`id`
+    <where>
+      <if test="searchContent!=null">
+        and ( e.city like CONCAT('%', #{searchContent},'%') or e.title like CONCAT('%', #{searchContent},'%') or et.typeContent like CONCAT('%', #{searchContent},'%')or e.instruction like CONCAT('%', #{searchContent},'%') )
+      </if>
+    </where>
+    and u.`id`=e.`founderId` and e.`type`=et.`id`
+  </select>
+  <select id="searchEvents" parameterType="java.util.Map" resultMap="EventWithUserResultMap">
+    select distinct
+    <include refid="EventsWithUserList"/>
+    from idea_event e,idea_user u,idea_eventtype et
+    <where>
     <if test="typeContent!=null">
         and et.typeContent = #{typeContent,jdbcType=VARCHAR}
     </if>
     <if test="searchContent!=null">
        and ( e.city like CONCAT('%', #{searchContent},'%') or e.title like CONCAT('%', #{searchContent},'%') or et.typeContent like CONCAT('%', #{searchContent},'%')or e.instruction like CONCAT('%', #{searchContent},'%') )
     </if>
+    </where>
+    and u.`id`=e.`founderId` and e.`type`=et.`id`
   </select>
 
   <select id="selectByExample" parameterType="com.hand.idea.domain.EventExample" resultMap="BaseResultMap">
@@ -208,6 +220,9 @@
       <if test="instruction != null">
         instruction,
       </if>
+      <if test="support != null">
+        support,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="founderId != null">
@@ -234,6 +249,9 @@
       <if test="instruction != null">
         #{instruction,jdbcType=VARCHAR},
       </if>
+      <if test="support != null">
+        #{support,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <insert id="insert" parameterType="com.hand.idea.domain.Event">
@@ -251,12 +269,12 @@
   <insert id="insertEvent" parameterType="com.hand.idea.domain.Event">
     insert into idea_event (founderId,title,
     type, photoName, province,
-    city,  createTime, instruction
+    city,  createTime, instruction,support
     )
     values (#{founderid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
     #{type,jdbcType=INTEGER}, #{photoname,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR},
     #{city,jdbcType=VARCHAR},  #{createtime,jdbcType=TIMESTAMP},
-  #{instruction,jdbcType=VARCHAR}
+  #{instruction,jdbcType=VARCHAR}, #{support,jdbcType=INTEGER}
     )
   </insert>
   <insert id="insertSelective" parameterType="com.hand.idea.domain.Event">

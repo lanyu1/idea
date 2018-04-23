@@ -128,5 +128,12 @@ public class EventController {
         PageInfo<Event> pageInfo = eventService.searchEvents(searchContent,typeContent, page, pageSize);
         return pageInfo;
     }
+    @RequestMapping(value = "/getSearchEventsByLike", method = RequestMethod.GET)
+    public PageInfo<Event> searchEventsByLike(@RequestParam(value="searchContent") String searchContent,
+                                        @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                        @RequestParam(value = "pageSize", required = false, defaultValue = "6") Integer pageSize) {
+        PageInfo<Event> pageInfo = eventService.searchEventsByLike(searchContent, page, pageSize);
+        return pageInfo;
+    }
 }
 

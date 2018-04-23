@@ -117,5 +117,12 @@ public class EventServiceImpl  implements EventService {
         return pageInfo;
     }
 
+    @Override
+    public PageInfo<Event> searchEventsByLike(String searchContent, Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+        List<Event> events = eventMapper.searchEventsByLike(searchContent);
+        PageInfo<Event> pageInfo = new PageInfo<Event>(events);
+        return pageInfo;
+    }
 
 }
