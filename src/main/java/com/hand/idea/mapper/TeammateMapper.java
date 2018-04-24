@@ -18,6 +18,8 @@ public interface TeammateMapper {
 
     List<Teammate> selectByExample(TeammateExample example);
 
+    List<Teammate> selectTeammateList(@Param("searchContent") String  searchContent);
+
     Teammate selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Teammate record, @Param("example") TeammateExample example);

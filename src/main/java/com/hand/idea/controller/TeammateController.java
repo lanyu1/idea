@@ -1,5 +1,7 @@
 package com.hand.idea.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.hand.idea.domain.Team;
 import com.hand.idea.domain.Teammate;
 import com.hand.idea.service.TeammateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +30,8 @@ public class TeammateController {
     }
 
 
-    @RequestMapping(value = "/deleteTeammate/{id}",method = RequestMethod.GET)
-    public String deleteTeammate(@PathVariable("id") Integer id){
+    @RequestMapping(value = "/deleteTeammate",method = RequestMethod.DELETE)
+    public String deleteTeammate(@RequestParam("id") Integer id){
         teammateService.deleteTeammate(id);
         return "删除成功";
     }
@@ -39,5 +41,14 @@ public class TeammateController {
     public String updateTeammate(@RequestBody Teammate teammate){
         teammateService.updateTeammate(teammate);
         return "修改成功";
+    }
+
+    @RequestMapping(value = "/selectTeamList",method = RequestMethod.GET)
+    public PageInfo<Teammate> selectTeammateList(@RequestParam(value="searchContent",required = false) String searchContent,
+                                               @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                               @RequestParam(value = "pageSize", required = false, defaultValue = "6") Integer pageSize){
+
+        PageInfo<Teammate> pageInfo = teammateService.selectTeammateList(searchContent, page, pageSize);
+        return pageInfo;
     }
 }

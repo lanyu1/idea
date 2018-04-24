@@ -1,5 +1,6 @@
 package com.hand.idea.service;
 
+import com.github.pagehelper.PageInfo;
 import com.hand.idea.domain.Teammate;
 
 /**
@@ -14,4 +15,6 @@ public interface TeammateService {
     public Integer updateTeammate(Teammate team);
 
     public Teammate selectTeammate(Integer id);
+
+    public PageInfo<Teammate> selectTeammateList(String searchContent,Integer page,Integer pageSize);
 }

@@ -69,6 +69,20 @@
   <sql id="Base_Column_List">
     id, teamId, teammateId, authority, duty
   </sql>
+  <select id="selectTeammateList" parameterType="com.hand.idea.domain.TeammateExample" resultType="java.util.Map">
+      SELECT
+      tm.*,
+      t.teamName,
+      (select u.nike_name from idea_user u where u.id = t.founderId) as founderName,
+      (select u.nike_name from idea_user u where u.id = tm.teammateId) as nikeName
+       FROM
+        `idea_teammate` tm,idea_team t
+       where
+         <if test="searchContent!=null">
+           ( t.teamName like CONCAT('%', #{searchContent},'%') or tm.duty like CONCAT('%', #{searchContent},'%') or (select u.nike_name from idea_user u where u.id = t.founderId) like CONCAT('%', #{searchContent},'%') or (select u.nike_name from idea_user u where u.id = tm.teammateId) like CONCAT('%', #{searchContent},'%') ) and
+         </if>
+         tm.teamId = t.id
+  </select>
   <select id="selectByExample" parameterType="com.hand.idea.domain.TeammateExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -108,8 +122,8 @@
   <insert id="insertSelective" parameterType="com.hand.idea.domain.Teammate">
     insert into idea_teammate
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="tid != null">
+        tid,
       </if>
       <if test="teamid != null">
         teamId,
@@ -125,8 +139,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
       </if>
       <if test="teamid != null">
         #{teamid,jdbcType=INTEGER},
@@ -198,7 +212,7 @@
         duty = #{duty,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{tid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hand.idea.domain.Teammate">
     update idea_teammate
