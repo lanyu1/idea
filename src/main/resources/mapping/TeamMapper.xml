@@ -154,7 +154,7 @@
       <if test="searchContent!=null">
         ( t.teamName like CONCAT('%', #{searchContent},'%') or t.notice like CONCAT('%', #{searchContent},'%') or t.description like CONCAT('%', #{searchContent},'%') )
       </if>
-      and u.id=t.founderId
+      and u.id=t.founderId order by t.createTime desc
     </where>
 
   </select>

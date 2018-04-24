@@ -45,8 +45,6 @@ public class TeamController {
 
             PageInfo<Team> pageInfo = teamService.selectTeamList(searchContent, page, pageSize);
             return pageInfo;
-//        List<Team> teamList= teamMapper.selectByExample(null);
-//        PageInfo<Team> pageInfo = new PageInfo<Team>(teamList);
     }
     @RequestMapping(value = "/addTeam",method = RequestMethod.POST)
     public String addTeam(@RequestBody Team team){
@@ -56,8 +54,8 @@ public class TeamController {
     }
 
 
-    @RequestMapping(value = "/deleteTeam/{id}",method = RequestMethod.GET)
-    public String deleteTeam(@PathVariable("id") Integer id){
+    @RequestMapping(value = "/deleteTeam",method = RequestMethod.DELETE)
+    public String deleteTeam(@RequestParam("id") Integer id){
         teamService.deleteTeam(id);
         requestData.setMessage("删除成功");
         return new Gson().toJson(requestData);
@@ -70,4 +68,5 @@ public class TeamController {
         requestData.setMessage("修改成功");
         return new Gson().toJson(requestData);
     }
+
 }
