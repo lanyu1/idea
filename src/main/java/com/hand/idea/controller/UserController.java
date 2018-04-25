@@ -57,19 +57,25 @@ public class UserController {
 					requestData.setCode("9999");
 					requestData.setState("500");
 					requestData.setMessage("请前往" + user.getEmail() + "邮箱激活");
+				} else if (u.getEmailStateId() == 1) {
+					requestData.setObject(u);
+					requestData.setCode("0000");
+					requestData.setState("200");
+					requestData.setMessage("登录成功");
+					//System.out.println(new Gson().toJson(requestData));
 					return new Gson().toJson(requestData);
 				}
-				requestData.setMessage("登录成功");
-				return new Gson().toJson(requestData);
 			}
 		}
 		requestData.setCode("9999");
 		requestData.setState("500");
 		requestData.setMessage("邮箱不存在或者密码错误");
+		requestData.setObject(user);
 		return new Gson().toJson(requestData);
-
-
 	}
+
+
+
 
 	@RequestMapping(value = "activation/{userId}", method = RequestMethod.GET)
 	public void activation(@PathVariable("userId") String userId, HttpServletResponse response) throws IOException {
@@ -157,6 +163,16 @@ public class UserController {
 		return userService.getUser(id);
 	}
 
+	@RequestMapping(value = "/selectPermissionByUserId",method = RequestMethod.GET)
+	public String selectPermissionByUserId(@RequestParam("userId") String userId){
+		User user = userService.selectPermissionByUserId(userId);
+		requestData.setObject(user);
+		requestData.setCode("0000");
+		requestData.setState("200");
+		requestData.setMessage("获取用户信息成功");
+		return new Gson().toJson(requestData);
+	}
+
 	/**
 	 * 根据邮箱查询用户信息
 	 * @param email
@@ -204,8 +220,10 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/addUser",method = RequestMethod.POST)
     public String addUser(@RequestBody User user){
-       userService.insert(user);
-       return "插入成功";
+		user.setUserId(UUID.randomUUID().toString().replace("-",""));
+		user.setUserToken(UUID.randomUUID().toString().replace("-",""));
+        userService.insert(user);
+        return "插入成功";
 	}
 
 	/**

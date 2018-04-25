@@ -37,6 +37,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User selectPermissionByUserId(String userId) {
+		return userMapper.selectPermissionByUserId(userId);
+	}
+
+	@Override
 	public User selectUserByEmail(String email) {
 		return userMapper.searchOneUserByEmail(email);
 	}

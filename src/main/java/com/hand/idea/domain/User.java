@@ -13,6 +13,8 @@ public class User {
 
     private String userId;
 
+    private String userToken;
+
     private String phone;
 
     private String email;
@@ -32,6 +34,8 @@ public class User {
     private String specialty;
 
     private String description;
+
+    private List<Permission> permissions;
 
     private List<Event> events;
 
@@ -64,6 +68,41 @@ public class User {
 		this.events = events;
 		this.hobbyList = hobbyList;
 	}
+
+    public User(Integer id, String userId, String userToken, String phone, String email, String password, Integer emailStateId, String nikeName, Integer age, String headPhoto, String area, String specialty, String description, List<Permission> permissions, List<Event> events, List<Hobby> hobbyList) {
+        this.id = id;
+        this.userId = userId;
+        this.userToken = userToken;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.emailStateId = emailStateId;
+        this.nikeName = nikeName;
+        this.age = age;
+        this.headPhoto = headPhoto;
+        this.area = area;
+        this.specialty = specialty;
+        this.description = description;
+        this.permissions = permissions;
+        this.events = events;
+        this.hobbyList = hobbyList;
+    }
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
+    }
+
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
+    }
 
     public String getUserId() {
         return userId;

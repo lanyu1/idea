@@ -60,6 +60,26 @@
       <result column="hobbyContent" jdbcType="VARCHAR" property="hobbycontent" />
     </collection>
   </resultMap>
+  <resultMap id="ResultMapWithPermission" type="com.hand.idea.domain.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="userToken" jdbcType="VARCHAR" property="userToken" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email_state_id" jdbcType="INTEGER" property="emailStateId" />
+    <result column="nike_name" jdbcType="VARCHAR" property="nikeName" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="head_photo" jdbcType="VARCHAR" property="headPhoto" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="specialty" jdbcType="VARCHAR" property="specialty" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <collection property="permissions" ofType="com.hand.idea.domain.Permission">
+      <id column="pid" jdbcType="INTEGER" property="pid" />
+      <result column="userId" jdbcType="VARCHAR" property="userId" />
+      <result column="permission" jdbcType="VARCHAR" property="permission" />
+    </collection>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -119,8 +139,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, phone, email, password, email_state_id, nike_name, age, head_photo, area, specialty, 
+    id,userId,userToken, phone, email, password, email_state_id, nike_name, age, head_photo, area, specialty,
     description
+  </sql>
+  <sql id="WithPermissionList">
+    u.id, u.userId,u.userToken,u.phone, u.email, u.password, u.email_state_id, u.nike_name, u.age, u.head_photo, u.area, u.specialty,
+    u.description,p.permission
   </sql>
   <sql id="WithHobbyList">
     u.id, u.phone, u.email, u.password, u.email_state_id, u.nike_name, u.age, u.head_photo, u.area, u.specialty,
@@ -131,6 +155,11 @@
     u.description,e.eid,e.founderId, e.title, e.type, e.photoName, e.province, e.city, e.detailedDescription, e.createTime,
     e.stateId, e.instruction, e.support
   </sql>
+  <select id="selectPermissionByUserId" parameterType="com.hand.idea.domain.UserExample" resultMap="ResultMapWithPermission">
+        SELECT u.*,p.permission
+        FROM `idea_user` u,idea_permission p
+        WHERE u.userId = p.userId and u.userId = #{userId,jdbcType=VARCHAR}
+  </select>
   <select id="selectWithUserId"  parameterType="com.hand.idea.domain.UserExample" resultMap="WithEventResultMap">
     select
     <include refid="WithEventList" />
@@ -198,11 +227,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hand.idea.domain.User">
-    insert into idea_user (id,userId, phone, email,
+    insert into idea_user (id,userId, userToken,phone, email,
       password, email_state_id, nike_name, 
       age, head_photo, area, 
       specialty, description)
-    values (#{id,jdbcType=INTEGER},#{userId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+    values (#{id,jdbcType=INTEGER},#{userId,jdbcType=VARCHAR},#{userToken,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
       #{password,jdbcType=VARCHAR}, #{emailStateId,jdbcType=INTEGER}, #{nikeName,jdbcType=VARCHAR}, 
       #{age,jdbcType=INTEGER}, #{headPhoto,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
       #{specialty,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})

@@ -12,6 +12,8 @@ public interface UserService {
 
 	public User login(User user);
 
+    public User selectPermissionByUserId(String userId);
+
 	public User selectUserByEmail(String email);
 
 	public User selectWithUserId(String userId);

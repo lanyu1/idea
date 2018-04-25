@@ -7,6 +7,15 @@ public class RequestData {
     private String code = "0000" ;
     private String state = "200" ;
     private String message = "成功" ;
+    private Object object;
+
+    public Object getObject() {
+        return object;
+    }
+
+    public void setObject(Object object) {
+        this.object = object;
+    }
 
     public String getCode() {
         return code;
