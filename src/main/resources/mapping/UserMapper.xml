@@ -76,7 +76,6 @@
     <result column="description" jdbcType="VARCHAR" property="description" />
     <collection property="permissions" ofType="com.hand.idea.domain.Permission">
       <id column="pid" jdbcType="INTEGER" property="pid" />
-      <result column="userId" jdbcType="VARCHAR" property="userId" />
       <result column="permission" jdbcType="VARCHAR" property="permission" />
     </collection>
   </resultMap>

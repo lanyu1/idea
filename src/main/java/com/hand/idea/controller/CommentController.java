@@ -20,9 +20,10 @@ public class CommentController {
     private CommentService commentService;
 
     @RequestMapping(value = "/getComments", method = RequestMethod.GET)
-    public PageInfo<Comment> getComments(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+    public PageInfo<Comment> getComments(@RequestParam(value = "eventid") Integer eventid,
+            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                      @RequestParam(value = "pageSize", required = false, defaultValue = "3") Integer pageSize) {
-        PageInfo<Comment> pageInfo = commentService.selectComments(page, pageSize);
+        PageInfo<Comment> pageInfo = commentService.selectComments(eventid,page, pageSize);
         return pageInfo;
     }
     @RequestMapping(value = "/addComment", method = RequestMethod.POST)

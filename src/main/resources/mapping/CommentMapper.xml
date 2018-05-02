@@ -88,7 +88,7 @@
     select
     <include refid="CommentWithUser" />
     from idea_comment c,idea_user u
-    where c.commentId = u.id order by commentTime DESC
+    where c.commentId = u.id and c.eventId=#{eventid,jdbcType=INTEGER} order by c.commentTime DESC
   </select>
   <select id="selectByExample" parameterType="com.hand.idea.domain.CommentExample" resultMap="BaseResultMap">
     select

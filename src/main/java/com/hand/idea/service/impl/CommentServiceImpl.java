@@ -30,9 +30,9 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public PageInfo<Comment> selectComments(Integer page, Integer pageSize) {
+    public PageInfo<Comment> selectComments(Integer eventid,Integer page, Integer pageSize) {
         PageHelper.startPage(page, pageSize);
-        List<Comment> events = commentMapper.selectCommentWithUser(null);
+        List<Comment> events = commentMapper.selectCommentWithUser(eventid);
         PageInfo<Comment> pageInfo = new PageInfo<Comment>(events);
         return pageInfo;
     }

@@ -6,5 +6,7 @@
         <result column="userId" jdbcType="VARCHAR" property="userId" />
         <result column="permission" jdbcType="VARCHAR" property="permission" />
     </resultMap>
-
+<select id="selectPermission" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from idea_permission where userId = #{userId,jdbcType=VARCHAR}
+</select>
 </mapper>

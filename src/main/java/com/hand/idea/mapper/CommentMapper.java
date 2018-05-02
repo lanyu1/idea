@@ -18,7 +18,7 @@ public interface CommentMapper {
 
     List<Comment> selectByExample(CommentExample example);
 
-    List<Comment> selectCommentWithUser(CommentExample example);
+    List<Comment> selectCommentWithUser(Integer eventid);
 
     Comment selectByPrimaryKey(Integer id);
 

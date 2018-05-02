@@ -10,5 +10,5 @@ public interface CommentService {
 
     public String addComment(Comment comment);
 
-    public PageInfo<Comment> selectComments(Integer page, Integer pageSize);
+    public PageInfo<Comment> selectComments(Integer eventid,Integer page, Integer pageSize);
 }
