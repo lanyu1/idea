@@ -28,7 +28,7 @@ public class Team {
 
     private String description;
 
-    private User users;
+    private List<User> users;
 
     private List<Teammate> teammates;
 
@@ -39,7 +39,7 @@ public class Team {
     public Team() {
     }
 
-    public Team(Integer id, Integer founderid, Integer eventid, String teamname, Integer teammatenumber, Integer maxteammatenumber, String notice, Date createtime, String photoname, String description, User users, List<Teammate> teammates, List<Question> questions, List<Schedule> schedules) {
+    public Team(Integer id, Integer founderid, Integer eventid, String teamname, Integer teammatenumber, Integer maxteammatenumber, String notice, Date createtime, String photoname, String description, List<User> users, List<Teammate> teammates, List<Question> questions, List<Schedule> schedules) {
         this.id = id;
         this.founderid = founderid;
         this.eventid = eventid;
@@ -163,11 +163,11 @@ public class Team {
         this.description = description == null ? null : description.trim();
     }
 
-    public User getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(User users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 

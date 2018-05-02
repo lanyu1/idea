@@ -199,7 +199,13 @@ public class UserController {
 		PageInfo info = new PageInfo(users, 5);
 		return users;
     }
-
+    @RequestMapping(value = "/selectUsers",method = RequestMethod.GET)
+   public PageInfo<User> selectUsers(@RequestParam(value="searchContent",required = false) String searchContent,
+									 @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+									 @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize){
+		PageInfo<User> pageInfo = userService.selectUsers(searchContent,page,pageSize);
+		return pageInfo;
+   }
 	/**
 	 * 查询用户带创意
 	 * @return

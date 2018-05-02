@@ -45,7 +45,7 @@
       <result column="isSendEmail" jdbcType="BIT" property="issendemail" />
       <result column="isSend" jdbcType="BIT" property="issend" />
     </collection>
-    <collection property="user" javaType="User">
+    <collection property="users" ofType="User">
       <id column="id" jdbcType="INTEGER" property="id" />
       <result column="nike_name" jdbcType="VARCHAR" property="nikename" />
     </collection>
@@ -139,9 +139,9 @@
     select
     <include refid="Column_List_Collection" />
     from idea_team t
-    cross join idea_teammate tm on t.id = tm.teamId
-    cross join idea_question q on t.id = q.teamId
-    cross join idea_schedule s on t.id = s.teamId
+    left join idea_teammate tm on t.id = tm.teamId
+    left join idea_question q on t.id = q.teamId
+    left join idea_schedule s on t.id = s.teamId
     and t.founderId = #{founderid,jdbcType=INTEGER} and t.eventId =#{eventid,jdbcType=INTEGER}
   </select>
   <select id="selectTeamListByLike" parameterType="com.hand.idea.domain.TeamExample" resultMap="ResultMapWithTeamList">

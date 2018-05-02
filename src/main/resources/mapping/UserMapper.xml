@@ -171,6 +171,20 @@
     from idea_user u left join idea_event e on u.`id`=e.`founderId`
     where email = #{email,jdbcType=VARCHAR}
   </select>
+  <select id="selectUsersBySearch" parameterType="com.hand.idea.domain.UserExample" resultMap="BaseResultMap">
+    SELECT
+    u.*
+    FROM
+    `idea_user` u
+    <where>
+      <if test="searchContent!=null">
+        ( u.nike_name like CONCAT('%', #{searchContent},'%') or
+        u.phone like CONCAT('%', #{searchContent},'%')
+        or  u.email like CONCAT('%', #{searchContent},'%') )
+      </if>
+    </where>
+    ORDER BY u.id asc
+  </select>
   <select id="searchOneUser" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

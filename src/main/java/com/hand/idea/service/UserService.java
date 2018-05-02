@@ -2,9 +2,12 @@ package com.hand.idea.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import com.hand.idea.domain.User;
 
 public interface UserService {
+
+	public PageInfo<User> selectUsers( String searchContent,Integer page, Integer pageSize);
 
 	public List<User> getUsers();
 

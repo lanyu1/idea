@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hand.idea.domain.User;
@@ -66,10 +68,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public PageInfo<User> selectUsers(String searchContent, Integer page, Integer pageSize) {
+		PageHelper.startPage(page,pageSize);
+		List<User> listUser = userMapper.selectUsersBySearch(searchContent);
+		PageInfo<User> pageInfo = new PageInfo<User>(listUser);
+		return pageInfo;
+	}
+
+	@Override
 	public List<User> getUsers() {
-		
-		List<User> users= userMapper.selectByExample(null);
-		return users;
+		return userMapper.selectByExample(null);
 	}
 
 	@Override

@@ -36,4 +36,21 @@ public class CommentServiceImpl implements CommentService{
         PageInfo<Comment> pageInfo = new PageInfo<Comment>(events);
         return pageInfo;
     }
+
+    @Override
+    public PageInfo<Comment> selectComments(String searchContent,Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+        List<Comment> events = commentMapper.selectComments(searchContent);
+        PageInfo<Comment> pageInfo = new PageInfo<Comment>(events);
+        return pageInfo;
+    }
+
+    @Override
+    public Integer deleteComment(Integer id) {
+        Comment comment = commentMapper.selectByPrimaryKey(id);
+        if(comment!=null){
+            commentMapper.deleteByPrimaryKey(id);
+        }
+        return -1;
+    }
 }

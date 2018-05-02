@@ -90,6 +90,22 @@
     from idea_comment c,idea_user u
     where c.commentId = u.id and c.eventId=#{eventid,jdbcType=INTEGER} order by c.commentTime DESC
   </select>
+  <select id="selectComments" parameterType="com.hand.idea.domain.CommentExample" resultType="java.util.Map">
+      SELECT
+          c.*,
+          (SELECT e.title FROM idea_event e WHERE e.eid = c.eventId) as title,
+          (select u.nike_name from idea_user u where u.id= c.commentId) userName
+      FROM
+          `idea_comment` c
+    <where>
+      <if test="searchContent!=null">
+        ( c.content like CONCAT('%', #{searchContent},'%') or
+        (SELECT e.title FROM idea_event e WHERE e.eid = c.eventId) like CONCAT('%', #{searchContent},'%')
+        or (select u.nike_name from idea_user u where u.id= c.commentId)  like CONCAT('%', #{searchContent},'%') )
+    </if>
+    </where>
+          ORDER BY c.commentTime DESC
+  </select>
   <select id="selectByExample" parameterType="com.hand.idea.domain.CommentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

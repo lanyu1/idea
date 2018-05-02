@@ -60,12 +60,24 @@ public class Comment {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
-    @JsonFormat(pattern="yyyy-MM-dd")
+
     public Date getCommenttime() {
         return commenttime;
     }
 
     public void setCommenttime(Date commenttime) {
         this.commenttime = commenttime;
+    }
+
+    public Comment() {
+    }
+
+    public Comment(Integer id, Integer eventid, Integer commentid, String content, Date commenttime, User user) {
+        this.id = id;
+        this.eventid = eventid;
+        this.commentid = commentid;
+        this.content = content;
+        this.commenttime = commenttime;
+        this.user = user;
     }
 }

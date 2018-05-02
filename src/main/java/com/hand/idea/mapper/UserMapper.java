@@ -20,6 +20,8 @@ public interface UserMapper {
 
     List<User> selectByExample(UserExample example);
 
+    List<User> selectUsersBySearch(@Param("searchContent") String searchContent);
+
     User selectByExampleWithEvent(Integer id);
 
     User selectByExampleWithHobby(Integer id);
