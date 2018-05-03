@@ -237,8 +237,8 @@ public class UserController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
-	public String deleteUser(@PathVariable("id") Integer id){
+	@RequestMapping(value = "/deleteUser",method = RequestMethod.DELETE)
+	public String deleteUser(@RequestParam("id") Integer id){
     	userService.delete(id);
     	return "删除成功";
 	}

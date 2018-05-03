@@ -144,7 +144,7 @@
     left join idea_schedule s on t.id = s.teamId
     and t.founderId = #{founderid,jdbcType=INTEGER} and t.eventId =#{eventid,jdbcType=INTEGER}
   </select>
-  <select id="selectTeamListByLike" parameterType="com.hand.idea.domain.TeamExample" resultMap="ResultMapWithTeamList">
+  <select id="selectTeamListByLike" parameterType="com.hand.idea.domain.TeamExample" resultType="java.util.Map">
     SELECT
     t.*,
     u.nike_name
