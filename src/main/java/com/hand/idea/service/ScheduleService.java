@@ -1,5 +1,7 @@
 package com.hand.idea.service;
 
+import com.github.pagehelper.PageInfo;
+import com.hand.idea.domain.Question;
 import com.hand.idea.domain.Schedule;
 
 /**
@@ -14,4 +16,6 @@ public interface ScheduleService {
     public Integer updateSchedule(Schedule team);
 
     public Schedule selectSchedule(Integer id);
+
+    public PageInfo<Schedule> selectScheduleList(String searchContent, Integer page, Integer pageSize);
 }

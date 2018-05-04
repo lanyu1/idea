@@ -18,6 +18,8 @@ public interface ReplyMapper {
 
     List<Reply> selectByExample(ReplyExample example);
 
+    List<Reply> selectReplyList(@Param("searchContent") String searchContent);
+
     Reply selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Reply record, @Param("example") ReplyExample example);

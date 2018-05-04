@@ -1,8 +1,11 @@
 package com.hand.idea.mapper;
 
+import com.hand.idea.domain.Question;
 import com.hand.idea.domain.Team;
 import com.hand.idea.domain.TeamExample;
 import java.util.List;
+
+import com.hand.idea.domain.Teammate;
 import org.apache.ibatis.annotations.Param;
 
 public interface TeamMapper {
@@ -19,6 +22,12 @@ public interface TeamMapper {
     List<Team> selectTeamListByLike(@Param("searchContent") String  searchContent);
 
     List<Team> selectByExample(TeamExample example);
+
+    List<Team> selectScheduleList(Integer eventid);
+
+    List<Question> selectQuestionList(Integer teamid);
+
+    List<Teammate> selectTeammateList(Integer teamid);
 
     List<Team> selectTeamWithCollection(@Param("founderid") Integer founderid,@Param("eventid") Integer eventid);
 

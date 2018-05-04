@@ -18,6 +18,8 @@ public interface ScheduleMapper {
 
     List<Schedule> selectByExample(ScheduleExample example);
 
+    List<Schedule> selectScheduleList(@Param("searchContent") String searchContent);
+
     Schedule selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Schedule record, @Param("example") ScheduleExample example);

@@ -144,6 +144,36 @@
     left join idea_schedule s on t.id = s.teamId
     and t.founderId = #{founderid,jdbcType=INTEGER} and t.eventId =#{eventid,jdbcType=INTEGER}
   </select>
+  <select id="selectScheduleList" parameterType="com.hand.idea.domain.TeamExample" resultType="java.util.Map">
+     SELECT
+    t.*,
+	s.content title,
+	s.createTime start,
+	s.workTime end
+FROM
+	`idea_team` t
+	LEFT JOIN idea_schedule s ON t.id = s.teamId WHERE t.eventId=#{eventid,jdbcType=INTEGER}
+  </select>
+  <select id="selectQuestionList" parameterType="com.hand.idea.domain.TeamExample" resultType="java.util.Map">
+    SELECT
+	q.*,
+	( SELECT nike_name FROM idea_user u WHERE u.id = q.questionerId ) userName
+FROM
+	`idea_question` q
+WHERE
+	q.teamId = #{teamid,jdbcType=INTEGER} order by q.createTime desc
+  </select>
+  <select id="selectTeammateList" parameterType="com.hand.idea.domain.TeamExample" resultType="java.util.Map">
+    SELECT
+        tm.*,
+        u.nike_name,
+        u.head_photo
+    FROM
+        `idea_teammate` tm
+        LEFT JOIN idea_user u ON u.id = tm.teammateId
+    WHERE
+        tm.teamId = #{teamid,jdbcType=INTEGER} order by tm.id asc
+  </select>
   <select id="selectTeamListByLike" parameterType="com.hand.idea.domain.TeamExample" resultType="java.util.Map">
     SELECT
     t.*,

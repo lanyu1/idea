@@ -1,7 +1,9 @@
 package com.hand.idea.service;
 
 import com.github.pagehelper.PageInfo;
+import com.hand.idea.domain.Question;
 import com.hand.idea.domain.Team;
+import com.hand.idea.domain.Teammate;
 
 import java.util.List;
 
@@ -19,7 +21,15 @@ public interface TeamService {
 
      public Team selectTeam(Integer id);
 
+     public List<Team> getTeams();
+
+     public List<Team> selectScheduleList(Integer eventid);
+
      public List<Team> selectTeamWithCollection(Integer founderid,Integer eventid);
 
      public PageInfo<Team> selectTeamList(String searchContent, Integer page, Integer pageSize);
+
+     public PageInfo<Question> selectQuestionList(Integer teamid,Integer page, Integer pageSize);
+
+     public List<Teammate> selectTeammateList(Integer teamid);
 }

@@ -85,6 +85,21 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectScheduleList" parameterType="com.hand.idea.domain.ScheduleExample" resultType="java.util.Map">
+    SELECT
+	s.*,
+	t.teamName
+FROM
+	`idea_schedule` s
+	LEFT JOIN idea_team t ON t.id = s.teamId
+    <where>
+      <if test="searchContent!=null">
+        and ( t.teamName like CONCAT('%', #{searchContent},'%') or
+        s.content like CONCAT('%', #{searchContent},'%'))
+      </if>
+    </where>
+    order by s.createTime asc
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

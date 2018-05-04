@@ -1,5 +1,6 @@
 package com.hand.idea.service;
 
+import com.github.pagehelper.PageInfo;
 import com.hand.idea.domain.Question;
 
 /**
@@ -14,4 +15,6 @@ public interface QuestionService {
     public Integer updateQuestion(Question question);
 
     public Question selectQuestion(Integer id);
+
+    public PageInfo<Question> selectQuestionList(String searchContent,Integer page, Integer pageSize);
 }

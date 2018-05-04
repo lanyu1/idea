@@ -89,6 +89,23 @@
     from idea_reply
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectReplyList" parameterType="com.hand.idea.domain.ReplyExample" resultType="java.util.Map">
+    SELECT
+    r.*,
+    c.content cContent,
+    u.nike_name
+    FROM
+    idea_reply r
+    LEFT JOIN idea_comment c ON c.id = r.commentId
+    left join idea_user u on r.commenterId=u.id
+    <where>
+      <if test="searchContent!=null">
+       and ( u.nike_name like CONCAT('%', #{searchContent},'%') or
+        r.content like CONCAT('%', #{searchContent},'%'))
+      </if>
+    </where>
+        order by r.id asc
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from idea_reply
     where id = #{id,jdbcType=INTEGER}

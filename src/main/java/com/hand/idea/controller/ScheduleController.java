@@ -1,6 +1,8 @@
 package com.hand.idea.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hand.idea.domain.Question;
+import com.hand.idea.domain.Reply;
 import com.hand.idea.domain.Schedule;
 import com.hand.idea.service.QuestionService;
 import com.hand.idea.service.ScheduleService;
@@ -18,6 +20,15 @@ public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
 
+    @RequestMapping(value = "/selectScheduleList",method = RequestMethod.GET)
+    public PageInfo<Schedule> selectScheduleList(@RequestParam(value = "searchContent") String  searchContent,
+                                           @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                           @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize){
+
+        PageInfo<Schedule> pageInfo =scheduleService.selectScheduleList(searchContent,page,pageSize);
+        return pageInfo;
+    }
+
     @RequestMapping(value = "/selectSchedule",method = RequestMethod.GET)
     public Schedule selectSchedule(@RequestParam("id") Integer id) {
         return scheduleService.selectSchedule(id);
@@ -30,14 +41,14 @@ public class ScheduleController {
     }
 
 
-    @RequestMapping(value = "/deleteQuestion/{id}",method = RequestMethod.GET)
-    public String deleteSchedule(@PathVariable("id") Integer id){
+    @RequestMapping(value = "/deleteSchedule",method = RequestMethod.DELETE)
+    public String deleteSchedule(@RequestParam("id") Integer id){
         scheduleService.deleteSchedule(id);
         return "删除成功";
     }
 
 
-    @RequestMapping(value = "/updateQuestion",method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateSchedule",method = RequestMethod.PUT)
     public String updateSchedule(@RequestBody Schedule schedule){
         scheduleService.updateSchedule(schedule);
         return "修改成功";

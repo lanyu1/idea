@@ -18,6 +18,8 @@ public interface QuestionMapper {
 
     List<Question> selectByExample(QuestionExample example);
 
+    List<Question> selectQuestionList(@Param("searchContent") String searchContent);
+
     Question selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Question record, @Param("example") QuestionExample example);

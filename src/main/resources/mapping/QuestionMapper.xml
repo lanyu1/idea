@@ -83,6 +83,23 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectQuestionList" parameterType="com.hand.idea.domain.ReplyExample" resultType="java.util.Map">
+    SELECT
+	q.*,
+	t.teamName,
+	u.nike_name
+FROM
+	`idea_question` q
+	LEFT JOIN idea_team t ON t.id = q.teamId
+	left join idea_user u on u.id = q.questionerId
+    <where>
+      <if test="searchContent!=null">
+        and ( t.teamName like CONCAT('%', #{searchContent},'%') or
+        u.nike_name like CONCAT('%', #{searchContent},'%') or q.content like CONCAT('%', #{searchContent},'%'))
+      </if>
+    </where>
+    order by q.createTime asc
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

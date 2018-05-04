@@ -1,6 +1,8 @@
 package com.hand.idea.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hand.idea.domain.Question;
+import com.hand.idea.domain.Reply;
 import com.hand.idea.domain.Teammate;
 import com.hand.idea.service.QuestionService;
 import com.hand.idea.service.TeammateService;
@@ -18,6 +20,15 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
+    @RequestMapping(value = "/selectQuestionList",method = RequestMethod.GET)
+    public PageInfo<Question> selectQuestionList(@RequestParam(value = "searchContent") String  searchContent,
+                                           @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                           @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize){
+
+        PageInfo<Question> pageInfo =questionService.selectQuestionList(searchContent,page,pageSize);
+        return pageInfo;
+    }
+
     @RequestMapping(value = "/selectQuestion",method = RequestMethod.GET)
     public Question selectQuestion(@RequestParam("id") Integer id){
         return questionService.selectQuestion(id);
@@ -30,8 +41,8 @@ public class QuestionController {
     }
 
 
-    @RequestMapping(value = "/deleteQuestion/{id}",method = RequestMethod.GET)
-    public String deleteQuestion(@PathVariable("id") Integer id){
+    @RequestMapping(value = "/deleteQuestion",method = RequestMethod.DELETE)
+    public String deleteQuestion(@RequestParam("id") Integer id){
         questionService.deleteQuestion(id);
         return "删除成功";
     }
