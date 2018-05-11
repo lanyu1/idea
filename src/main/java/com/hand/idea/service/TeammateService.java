@@ -16,5 +16,7 @@ public interface TeammateService {
 
     public Teammate selectTeammate(Integer id);
 
+    public Teammate selectTeamLeader(Integer teamid);
+
     public PageInfo<Teammate> selectTeammateList(String searchContent,Integer page,Integer pageSize);
 }

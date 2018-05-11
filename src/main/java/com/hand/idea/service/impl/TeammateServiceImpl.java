@@ -44,6 +44,11 @@ public class TeammateServiceImpl implements TeammateService{
     }
 
     @Override
+    public Teammate selectTeamLeader(Integer teamid) {
+        return teammateMapper.selectTeamLeader(teamid);
+    }
+
+    @Override
     public PageInfo<Teammate> selectTeammateList(String searchContent,Integer page,Integer pageSize) {
         PageHelper.startPage(page, pageSize);
         List<Teammate> teammateList = teammateMapper.selectTeammateList(searchContent);

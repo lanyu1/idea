@@ -91,7 +91,7 @@ public class UserController {
 	public String regUser(@RequestBody User user) {
 		List<User> users = userService.getUsers();
 		for (User u : users) {
-			if (u.getEmail() == user.getEmail()) {
+			if (u.getEmail().equals(user.getEmail())) {
 				requestData.setMessage("该邮箱已经被注册！");
 				requestData.setState("400");
 				return new Gson().toJson(requestData);
@@ -114,6 +114,8 @@ public class UserController {
 		for(User u : users) {
 			if(u!=null || u.getEmail()== user.getEmail()) {
 				user.setPassword("666666");
+				user.setId(u.getId());
+				user.setEmailStateId(1);
 				userService.update(user);
 				requestData.setMessage("密码已经重置，快去查看你的邮箱");
 				sendSimpleEmail(u.getEmail(), "您好，您密码已重置，初始密码：666666，为了你的安全请尽快修改密码。");
@@ -250,7 +252,17 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/updateUser",method = RequestMethod.PUT)
 	public String updateUser(@RequestBody User user){
-		userService.update(user);
+		User u = new User();
+		u.setId(user.getId());
+		u.setPassword(user.getPassword());
+		u.setEmail(user.getEmail());
+		u.setDescription(user.getDescription());
+		u.setNikeName(user.getNikeName());
+		u.setPhone(user.getPhone());
+		u.setSpecialty(user.getSpecialty());
+		u.setHeadPhoto(user.getHeadPhoto());
+		u.setEmailStateId(1);
+		userService.update(u);
 		return "修改成功";
 	}
 }

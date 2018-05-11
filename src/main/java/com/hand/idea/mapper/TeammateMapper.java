@@ -16,6 +16,8 @@ public interface TeammateMapper {
 
     int insertSelective(Teammate record);
 
+    Teammate selectTeamLeader(@Param("teamid") Integer teamid);
+
     List<Teammate> selectByExample(TeammateExample example);
 
     List<Teammate> selectTeammateList(@Param("searchContent") String  searchContent);

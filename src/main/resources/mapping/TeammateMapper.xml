@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hand.idea.mapper.TeammateMapper">
   <resultMap id="BaseResultMap" type="com.hand.idea.domain.Teammate">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="tid" />
     <result column="teamId" jdbcType="INTEGER" property="teamid" />
     <result column="teammateId" jdbcType="INTEGER" property="teammateid" />
     <result column="authority" jdbcType="INTEGER" property="authority" />
@@ -69,6 +69,11 @@
   <sql id="Base_Column_List">
     id, teamId, teammateId, authority, duty
   </sql>
+  <select id="selectTeamLeader" parameterType="com.hand.idea.domain.TeammateExample" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+     from idea_teammate where teamId = #{teamid,jdbcType=INTEGER} and authority=1
+  </select>
   <select id="selectTeammateList" parameterType="com.hand.idea.domain.TeammateExample" resultType="java.util.Map">
       SELECT
       tm.*,

@@ -23,7 +23,7 @@ public class QuestionController {
     @RequestMapping(value = "/selectQuestionList",method = RequestMethod.GET)
     public PageInfo<Question> selectQuestionList(@RequestParam(value = "searchContent") String  searchContent,
                                            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                           @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize){
+                                           @RequestParam(value = "pageSize", required = false, defaultValue = "2") Integer pageSize){
 
         PageInfo<Question> pageInfo =questionService.selectQuestionList(searchContent,page,pageSize);
         return pageInfo;

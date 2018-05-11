@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("teammate")
+@RequestMapping("/teammate")
 public class TeammateController {
 
     @Autowired
@@ -21,6 +21,11 @@ public class TeammateController {
     @RequestMapping(value = "/selectTeammate",method = RequestMethod.GET)
     public Teammate selectTeammate(@RequestParam("id") Integer id){
         return teammateService.selectTeammate(id);
+    }
+
+    @RequestMapping(value = "/selectTeamLeader",method = RequestMethod.GET)
+    public Teammate selectTeamLeader(@RequestParam("teamid") Integer teamid){
+        return teammateService.selectTeamLeader(teamid);
     }
 
     @RequestMapping(value = "/addTeammate",method = RequestMethod.POST)
